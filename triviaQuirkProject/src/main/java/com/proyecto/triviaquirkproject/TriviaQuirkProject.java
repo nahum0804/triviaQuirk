@@ -6,7 +6,7 @@ package com.proyecto.triviaquirkproject;
 
 /**
  *
- * @author Usuario
+ * @author Nahum
  */
 public class TriviaQuirkProject {
 
