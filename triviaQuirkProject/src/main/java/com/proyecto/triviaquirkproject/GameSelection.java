@@ -4,17 +4,26 @@
  */
 package com.proyecto.triviaquirkproject;
 
+import javax.swing.ButtonGroup;
+
 /**
  *
  * @author Arnold
  */
 public class GameSelection extends javax.swing.JFrame {
 
+    private final ButtonGroup buttonGroup;
+    
     /**
      * Creates new form GameSelection
      */
     public GameSelection() {
         initComponents();
+        buttonGroup = new ButtonGroup();
+        buttonGroup.add(chekbCine);
+        buttonGroup.add(checkbHistoria);
+        buttonGroup.add(checkbCiencia);
+        buttonGroup.add(checkbSorpresa);
     }
 
     /**
@@ -46,6 +55,11 @@ public class GameSelection extends javax.swing.JFrame {
         checkbSorpresa.setText("Sorpresa");
 
         btnSiguiente.setText("Siguiente");
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,6 +105,20 @@ public class GameSelection extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        if (chekbCine.isSelected()) {
+            System.out.println("Cine seleccionado");
+        } else if (checkbHistoria.isSelected()) {
+            System.out.println("Historia seleccionada");
+        } else if (checkbCiencia.isSelected()) {
+            System.out.println("Ciencia y Tecnología seleccionada");
+        } else if (checkbSorpresa.isSelected()) {
+            System.out.println("Sorpresa seleccionada");
+        } else {
+            System.out.println("No se ha seleccionado ninguna opción");
+        }
+    }//GEN-LAST:event_btnSiguienteActionPerformed
+    
     /**
      * @param args the command line arguments
      */

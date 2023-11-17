@@ -20,7 +20,6 @@ import poo.proyecto2.triviaquirk.iSuscriptorPreguntas;
  * @author Usuario
  */
 public class CategoriaTecnologiaYCiencia implements iCategorias {
-    private final String nombre = "Tecnologia y Ciencia";
     private final ArrayList<Partida> partidasActivas = new ArrayList();
     private static CategoriaTecnologiaYCiencia instancia;
 
@@ -31,11 +30,13 @@ public class CategoriaTecnologiaYCiencia implements iCategorias {
         return instancia == null ? new CategoriaTecnologiaYCiencia() : instancia;
     }
 
+    @Override
     public String nombreCategoria() {
         Objects.requireNonNull(this);
         return "Tecnologia y ciencia";
     }
 
+    @Override
     public int registrarPartida() {
         int nuevaPartida = 0;
 
@@ -51,6 +52,7 @@ public class CategoriaTecnologiaYCiencia implements iCategorias {
         return nuevaPartida;
     }
 
+    @Override
     public void finalizarPartida(int numeroPartida) throws excepcionPartidaNoDisponible {
         boolean encontrada = false;
 

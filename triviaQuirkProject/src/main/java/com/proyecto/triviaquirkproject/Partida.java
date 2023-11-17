@@ -26,8 +26,8 @@ class Partida {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
         public void run() {
-            StartGame questions = new StartGame();
-            questions.setVisible(true);
+            GameSelection selector = new GameSelection();
+            selector.setVisible(true);
             }
         });
     }

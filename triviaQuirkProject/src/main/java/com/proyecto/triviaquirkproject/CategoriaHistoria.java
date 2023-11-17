@@ -24,7 +24,6 @@ import poo.proyecto2.triviaquirk.iSuscriptorPreguntas;
  * @author Usuario
  */
 public class CategoriaHistoria implements iCategorias {
-    private final String nombre = "Historia";
     private final ArrayList<Partida> partidasActivas = new ArrayList();
     private static CategoriaHistoria instancia;
 
@@ -38,7 +37,7 @@ public class CategoriaHistoria implements iCategorias {
     @Override
     public String nombreCategoria() {
         Objects.requireNonNull(this);
-        return "Cine";
+        return "Historia";
     }
     
     @Override

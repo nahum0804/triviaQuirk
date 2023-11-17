@@ -21,15 +21,14 @@ import poo.proyecto2.triviaquirk.iSuscriptorPreguntas;
  * @author Usuario
  */
 public class CategoriaSorpresa {
-    private final String nombre = "Sorpresa";
     private final ArrayList<Partida> partidasActivas = new ArrayList();
     private static CategoriaTecnologiaYCiencia instancia;
 
     public CategoriaSorpresa() {
     }
 
-    public static CategoriaTecnologiaYCiencia getInstance() {
-        return instancia == null ? new CategoriaTecnologiaYCiencia() : instancia;
+    public static Object getInstance() {
+        return instancia == null ? new CategoriaSorpresa() : instancia;
     }
 
     public String nombreCategoria() {

@@ -20,7 +20,6 @@ import poo.proyecto2.triviaquirk.iSuscriptorPreguntas;
  * @author Usuario
  */
 public class CategoriaCine implements iCategorias {
-    private final String nombre = "Cine";
     private final ArrayList<Partida> partidasActivas = new ArrayList();
     private static CategoriaCine instancia;
 

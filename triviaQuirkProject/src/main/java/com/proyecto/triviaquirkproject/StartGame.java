@@ -4,17 +4,29 @@
  */
 package com.proyecto.triviaquirkproject;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import poo.proyecto2.triviaquirk.excepciones.excepcionPartidaNoDisponible;
+import poo.proyecto2.triviaquirk.excepciones.excepcionPreguntasNoDisponibles;
+import poo.proyecto2.triviaquirk.iJugador;
+import poo.proyecto2.triviaquirk.iPregunta;
+import poo.proyecto2.triviaquirk.iSuscriptorPreguntas;
+
 /**
  *
  * @author Arnold
  */
 public class StartGame extends javax.swing.JFrame {
-
+        CategoriaCine categoriacine = new CategoriaCine();
+        CategoriaHistoria categoriahistoria = new CategoriaHistoria();
+        CategoriaTecnologiaYCiencia categoriaCiencia = new CategoriaTecnologiaYCiencia();
+        CategoriaSorpresa categoriasorpresa = new CategoriaSorpresa();  
+        
     /**
      * Creates new form StartGame
      */
     public StartGame() {
-        initComponents();
+        initComponents();      
     }
 
     /**
@@ -30,7 +42,6 @@ public class StartGame extends javax.swing.JFrame {
         btnOpcionA = new javax.swing.JButton();
         btnOpcionB = new javax.swing.JButton();
         btnOpcionC = new javax.swing.JButton();
-        btnOpcionD = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -42,43 +53,35 @@ public class StartGame extends javax.swing.JFrame {
 
         btnOpcionC.setText("OpcionC");
 
-        btnOpcionD.setText("OpcionD");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnOpcionC)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
-                        .addComponent(btnOpcionD))
+                        .addGap(154, 154, 154)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnOpcionC)
+                            .addComponent(btnOpcionA)
+                            .addComponent(btnOpcionB)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnOpcionA)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnOpcionB)))
-                .addGap(89, 89, 89))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(126, 126, 126)
-                .addComponent(lblGuardarPregunta)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(124, 124, 124)
+                        .addComponent(lblGuardarPregunta)))
+                .addContainerGap(135, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(41, 41, 41)
                 .addComponent(lblGuardarPregunta)
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnOpcionA)
-                    .addComponent(btnOpcionB))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnOpcionC)
-                    .addComponent(btnOpcionD))
-                .addGap(71, 71, 71))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addComponent(btnOpcionA)
+                .addGap(28, 28, 28)
+                .addComponent(btnOpcionB)
+                .addGap(43, 43, 43)
+                .addComponent(btnOpcionC)
+                .addGap(46, 46, 46))
         );
 
         pack();
@@ -123,7 +126,6 @@ public class StartGame extends javax.swing.JFrame {
     private javax.swing.JButton btnOpcionA;
     private javax.swing.JButton btnOpcionB;
     private javax.swing.JButton btnOpcionC;
-    private javax.swing.JButton btnOpcionD;
     private javax.swing.JLabel lblGuardarPregunta;
     // End of variables declaration//GEN-END:variables
 }
