@@ -11,6 +11,11 @@ package com.proyecto.triviaquirkproject;
 public class TriviaQuirkProject {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                MainJF mainJF = new MainJF();
+                mainJF.setVisible(true);
+            }
+        });
     }
 }

@@ -4,6 +4,8 @@
  */
 package com.proyecto.triviaquirkproject;
 
+import java.awt.Color;
+
 /**
  *
  * @author Arnold
@@ -29,6 +31,7 @@ public class Login extends javax.swing.JFrame {
         lblDigiteNombre = new javax.swing.JLabel();
         tfInputNombre = new javax.swing.JTextField();
         btnSiguiente = new javax.swing.JButton();
+        jLabelMessage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -41,6 +44,13 @@ public class Login extends javax.swing.JFrame {
         });
 
         btnSiguiente.setText("Ingresar");
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
+
+        jLabelMessage.setText("Unicamente puedes usar letras y numeros");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -48,24 +58,32 @@ public class Login extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(124, 124, 124)
+                            .addComponent(lblDigiteNombre))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(167, 167, 167)
+                            .addComponent(btnSiguiente))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(tfInputNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(9, 9, 9)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(124, 124, 124)
-                        .addComponent(lblDigiteNombre))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(167, 167, 167)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSiguiente)
-                            .addComponent(tfInputNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(125, Short.MAX_VALUE))
+                        .addGap(86, 86, 86)
+                        .addComponent(jLabelMessage)))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(lblDigiteNombre)
-                .addGap(63, 63, 63)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                 .addComponent(tfInputNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelMessage)
+                .addGap(53, 53, 53)
                 .addComponent(btnSiguiente)
                 .addGap(37, 37, 37))
         );
@@ -76,6 +94,27 @@ public class Login extends javax.swing.JFrame {
     private void tfInputNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfInputNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfInputNombreActionPerformed
+
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        String nombreJugador = tfInputNombre.getText();
+
+        // Expresión regular para validar que solo hay letras, números y espacios
+        String regex = "^[a-zA-Z0-9]+$";
+
+        // Verificar si el nombre del jugador cumple con la expresión regular
+        if (nombreJugador.matches(regex)) {
+            // El nombre del jugador es válido (solo contiene letras, números y espacios)
+            this.dispose();
+            Jugador jugadorNuevo = new Jugador(nombreJugador);
+            Partida partida = new Partida(1);
+            partida.addJugador(jugadorNuevo);
+        } else {
+            // El nombre del jugador no es válido
+            System.out.println("Nombre del jugador no válido. Solo se permiten letras y números.");
+            tfInputNombre.setText("");
+            jLabelMessage.setForeground(Color.RED);
+        }      
+    }//GEN-LAST:event_btnSiguienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -114,6 +153,7 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSiguiente;
+    private javax.swing.JLabel jLabelMessage;
     private javax.swing.JLabel lblDigiteNombre;
     private javax.swing.JTextField tfInputNombre;
     // End of variables declaration//GEN-END:variables

@@ -36,6 +36,11 @@ public class MainJF extends javax.swing.JFrame {
         lblAccion.setText("Seleccione la accion a realizar");
 
         btnJugar.setText("Empezar Partida");
+        btnJugar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnJugarActionPerformed(evt);
+            }
+        });
 
         btnListaJugadores.setText("Lista Jugadores");
 
@@ -78,6 +83,15 @@ public class MainJF extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJugarActionPerformed
+        this.dispose();
+        
+        GameMode gameMode = new GameMode();
+        gameMode.setVisible(true);
+    }//GEN-LAST:event_btnJugarActionPerformed
+
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -113,6 +127,7 @@ public class MainJF extends javax.swing.JFrame {
         });
     }
 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnJugar;
     private javax.swing.JButton btnListaJugadores;

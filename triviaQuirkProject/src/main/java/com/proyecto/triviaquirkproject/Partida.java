@@ -23,6 +23,13 @@ class Partida {
         this.numeroPreguntasRealizadas = new ArrayList();
         this.listadoSuscriptores = new ArrayList();
         this.listadoJugadores = new ArrayList();
+        
+        java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+            StartGame questions = new StartGame();
+            questions.setVisible(true);
+            }
+        });
     }
 
     public ArrayList<iSuscriptorPreguntas> getListadoSuscriptores() {

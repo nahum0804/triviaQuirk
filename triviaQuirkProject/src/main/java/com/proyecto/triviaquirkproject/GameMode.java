@@ -35,6 +35,11 @@ public class GameMode extends javax.swing.JFrame {
         lblSeleccionModo.setText("Seleccione el modo de juego");
 
         btnSolitario.setText("Solitario");
+        btnSolitario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSolitarioActionPerformed(evt);
+            }
+        });
 
         btnMultijugador.setText("Multijugador");
 
@@ -69,6 +74,13 @@ public class GameMode extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSolitarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolitarioActionPerformed
+        this.dispose();
+        
+        Login login = new Login();
+        login.setVisible(true);
+    }//GEN-LAST:event_btnSolitarioActionPerformed
 
     /**
      * @param args the command line arguments
