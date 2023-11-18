@@ -12,6 +12,7 @@ import java.util.Objects;
 import java.util.Random;
 import poo.proyecto2.triviaquirk.excepciones.excepcionPartidaNoDisponible;
 import poo.proyecto2.triviaquirk.excepciones.excepcionPreguntasNoDisponibles;
+import poo.proyecto2.triviaquirk.iCategorias;
 import poo.proyecto2.triviaquirk.iJugador;
 import poo.proyecto2.triviaquirk.iPregunta;
 import poo.proyecto2.triviaquirk.iSuscriptorPreguntas;
@@ -20,14 +21,14 @@ import poo.proyecto2.triviaquirk.iSuscriptorPreguntas;
  *
  * @author Usuario
  */
-public class CategoriaSorpresa {
+public class CategoriaSorpresa implements iCategorias{
     private final ArrayList<Partida> partidasActivas = new ArrayList();
     private static CategoriaTecnologiaYCiencia instancia;
 
     public CategoriaSorpresa() {
     }
 
-    public static Object getInstance() {
+    public static iCategorias getInstance() {
         return instancia == null ? new CategoriaSorpresa() : instancia;
     }
 

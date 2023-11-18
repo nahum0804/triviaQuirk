@@ -5,18 +5,34 @@
 package com.proyecto.triviaquirkproject;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import javax.swing.ButtonGroup;
 
 /**
  *
  * @author Arnold
  */
 public class Login extends javax.swing.JFrame {
-
+    
+    private ButtonGroup buttonGroup;
+    private ArrayList<String> categoriasSeleccionadas; 
+    String nombreJugador;
+    //private CategoriaHistoria catHistoria = new CategoriaHistoria().getInstance();
+    //private CategoriaCine catCine = new CategoriaCine().getInstance();
+    //private CategoriaSorpresa catSorpresa = new CategoriaSorpresa().getInstancia();
+    //private CategoriaTecnologiaYCiencia catTecCien = new CategoriaTecnologiaYCiencia().getInstance();
+    
     /**
      * Creates new form Login
      */
     public Login() {
+        categoriasSeleccionadas = new ArrayList<>();
         initComponents();
+        jCheckBox1.setVisible(false);
+        jCheckBox2.setVisible(false);
+        jCheckBox3.setVisible(false);
+        jCheckBox4.setVisible(false);
+        jButton1.setVisible(false);
     }
 
     /**
@@ -32,6 +48,11 @@ public class Login extends javax.swing.JFrame {
         tfInputNombre = new javax.swing.JTextField();
         btnSiguiente = new javax.swing.JButton();
         jLabelMessage = new javax.swing.JLabel();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        jCheckBox3 = new javax.swing.JCheckBox();
+        jCheckBox4 = new javax.swing.JCheckBox();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,39 +73,96 @@ public class Login extends javax.swing.JFrame {
 
         jLabelMessage.setText("Unicamente puedes usar letras y numeros");
 
+        jCheckBox1.setText("Cine");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+
+        jCheckBox2.setText("Historia");
+        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox2ActionPerformed(evt);
+            }
+        });
+
+        jCheckBox3.setText("Ciencia y Tecnología");
+        jCheckBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox3ActionPerformed(evt);
+            }
+        });
+
+        jCheckBox4.setText("Sorpresa");
+        jCheckBox4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox4ActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("JUGAR!!");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 93, Short.MAX_VALUE)
-                .addComponent(jLabelMessage)
-                .addGap(87, 87, 87))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(tfInputNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(151, 151, 151))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblDigiteNombre)
+                        .addGap(138, 138, 138))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabelMessage)
+                        .addGap(102, 102, 102))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnSiguiente)
+                        .addGap(181, 181, 181))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(167, 167, 167)
-                        .addComponent(btnSiguiente))
+                        .addGap(28, 28, 28)
+                        .addComponent(jCheckBox1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jCheckBox2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jCheckBox3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jCheckBox4))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addComponent(tfInputNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(125, 125, 125)
-                        .addComponent(lblDigiteNombre)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(193, 193, 193)
+                        .addComponent(jButton1)))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(72, 72, 72)
+                .addGap(69, 69, 69)
                 .addComponent(lblDigiteNombre)
-                .addGap(28, 28, 28)
+                .addGap(31, 31, 31)
                 .addComponent(tfInputNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelMessage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnSiguiente)
-                .addGap(37, 37, 37))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBox1)
+                    .addComponent(jCheckBox2)
+                    .addComponent(jCheckBox3)
+                    .addComponent(jCheckBox4))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18))
         );
 
         pack();
@@ -103,10 +181,21 @@ public class Login extends javax.swing.JFrame {
         // Verificar si el nombre del jugador cumple con la expresión regular
         if (nombreJugador.matches(regex)) {
             // El nombre del jugador es válido (solo contiene letras, números y espacios)
-            this.dispose();
-            Jugador jugadorNuevo = new Jugador(nombreJugador);
-            Partida partida = new Partida(1);
-            partida.addJugador(jugadorNuevo);
+            buttonGroup = new ButtonGroup();
+            buttonGroup.add(chekbCine);
+            buttonGroup.add(checkbHistoria);
+            buttonGroup.add(checkbCiencia);
+            buttonGroup.add(checkbSorpresa);
+            
+            jLabelMessage.setForeground(Color.BLACK);
+            jLabelMessage.setEnabled(false);
+            btnSiguiente.setVisible(false);
+            jCheckBox1.setVisible(true);
+            jCheckBox2.setVisible(true);
+            jCheckBox3.setVisible(true);
+            jCheckBox4.setVisible(true);
+            jButton1.setVisible(true);
+            
         } else {
             // El nombre del jugador no es válido
             System.out.println("Nombre del jugador no válido. Solo se permiten letras y números.");
@@ -114,6 +203,49 @@ public class Login extends javax.swing.JFrame {
             jLabelMessage.setForeground(Color.RED);
         }      
     }//GEN-LAST:event_btnSiguienteActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        if(jCheckBox1.isSelected()){
+            categoriasSeleccionadas.add("Cine");
+        } else {
+            categoriasSeleccionadas.remove("Cine");
+        }
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+        if(jCheckBox2.isSelected()){
+            categoriasSeleccionadas.add("Historia");
+        } else {
+            categoriasSeleccionadas.remove("Historia");
+        }
+    }//GEN-LAST:event_jCheckBox2ActionPerformed
+
+    private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
+        if(jCheckBox3.isSelected()){
+            categoriasSeleccionadas.add("Ciencia y Tecnologia");
+        } else {
+            categoriasSeleccionadas.remove("Ciencia y Tecnologia");
+        }
+    }//GEN-LAST:event_jCheckBox3ActionPerformed
+
+    private void jCheckBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox4ActionPerformed
+        if(jCheckBox4.isSelected()){
+            categoriasSeleccionadas.add("Sorpresa");
+        } else {
+            categoriasSeleccionadas.remove("Sorpresa");
+        }
+    }//GEN-LAST:event_jCheckBox4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(categoriasSeleccionadas.isEmpty()){
+            System.out.println("Debe escoger al menos una categoria de preguntas para poder jugar");
+        } else {
+            this.dispose();
+            System.out.println("Listo!");
+            StartGame game = new StartGame();
+            game.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,8 +282,18 @@ public class Login extends javax.swing.JFrame {
         });
     }
 
+    private javax.swing.JCheckBox checkbCiencia;
+    private javax.swing.JCheckBox checkbHistoria;
+    private javax.swing.JCheckBox checkbSorpresa;
+    private javax.swing.JCheckBox chekbCine;
+    private javax.swing.JLabel lblEscogerCategoria;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSiguiente;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JLabel jLabelMessage;
     private javax.swing.JLabel lblDigiteNombre;
     private javax.swing.JTextField tfInputNombre;
