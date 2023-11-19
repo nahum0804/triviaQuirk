@@ -19,7 +19,7 @@ public class Login extends javax.swing.JFrame {
     private ButtonGroup buttonGroup;
     private ArrayList<String> categoriasSeleccionadas; 
     String nombreJugador;
-    CategoriaHistoria categoriaInstancia = new CategoriaHistoria().getInstance();
+    Categoria categoriaInstancia = new Categoria().getInstance();
     private Partida partidaActual;
     private int numeroPartida;
     //private CategoriaHistoria catHistoria = new CategoriaHistoria().getInstance();
@@ -248,7 +248,6 @@ public class Login extends javax.swing.JFrame {
             //this.dispose();
             numeroPartida = categoriaInstancia.registrarPartida();
             partidaActual = new Partida(numeroPartida); // Instancia unica - Singleton
-            System.out.println(nombreJugador);
             Jugador jugadorActual = new Jugador(nombreJugador);
             partidaActual.addJugador(jugadorActual);
     

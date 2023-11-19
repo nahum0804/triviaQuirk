@@ -24,10 +24,12 @@ public class PlayGame extends JFrame {
     private JButton btnIniciar;
     private JLabel lblJugador;
     private JLabel lblNumeroPartida;
+    private int numJugadores;
 
       public PlayGame(ArrayList<String> listaCategorias, Partida partida) {
         this.listaCategorias = listaCategorias;
         this.partida = partida;
+        this.numJugadores = partida.listadoJugadores.size();
 
         // Configuración de la ventana
         setTitle("Inicio de Juego");

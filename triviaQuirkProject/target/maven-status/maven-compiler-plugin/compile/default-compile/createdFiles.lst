@@ -9,6 +9,7 @@ com\proyecto\triviaquirkproject\PreguntaSorpresa.class
 com\proyecto\triviaquirkproject\StartGame$7.class
 com\proyecto\triviaquirkproject\Categoria.class
 com\proyecto\triviaquirkproject\Login$8.class
+com\proyecto\triviaquirkproject\MultiLogin$5.class
 com\proyecto\triviaquirkproject\PlayGame$1.class
 com\proyecto\triviaquirkproject\Login$5.class
 com\proyecto\triviaquirkproject\Login$2.class
@@ -31,5 +32,6 @@ com\proyecto\triviaquirkproject\MainJF$1.class
 com\proyecto\triviaquirkproject\MainJF.class
 com\proyecto\triviaquirkproject\Login$3.class
 com\proyecto\triviaquirkproject\PlayGame.class
+com\proyecto\triviaquirkproject\MultiLogin$4.class
 com\proyecto\triviaquirkproject\Login.class
 com\proyecto\triviaquirkproject\PreguntaCienciaTecnologia.class

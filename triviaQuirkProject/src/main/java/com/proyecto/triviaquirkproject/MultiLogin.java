@@ -24,12 +24,21 @@ import javax.swing.JTextField;
  */
 public class MultiLogin extends javax.swing.JFrame {
     int contador = 4;
-   
+    private String nombreJugador1;
+    private String nombreJugador2;
+    private String nombreJugador3;
+    private String nombreJugador4;
+    private ArrayList<Jugador> listaDeJugadores;
+    private int numeroPartida;
+    Categoria categoriaInstancia = new Categoria().getInstance();
+
+    
     /**
      * Creates new form MultiLogin
      */
    
     public MultiLogin() {
+        listaDeJugadores = new ArrayList<>();
         initComponents();
         //colocar los checkb en un gruo para que solo se seleccione uno
         ButtonGroup bg = new ButtonGroup();
@@ -39,8 +48,13 @@ public class MultiLogin extends javax.swing.JFrame {
         bg.add(chekbSorpresa);
         tfJugador3.setVisible(false);
         tfJugador4.setVisible(false);
-        tfJugador3.setVisible(rootPaneCheckingEnabled);
-        tfJugador4.setVisible(rootPaneCheckingEnabled);
+        btnSiguiente.setVisible(false);
+        chekbCine.setVisible(false);
+        chekbHistoria.setVisible(false);
+        chekbSorpresa.setVisible(false);
+        chekbCiencia.setVisible(false);
+        jLabel3.setVisible(false);
+        jLabel4.setVisible(false);
         btnNumJugador.setText("4");
         
         //Crear un contador que empiece en 2
@@ -60,14 +74,18 @@ public class MultiLogin extends javax.swing.JFrame {
                         btnNumJugador.setText("3");
                         tfJugador3.setVisible(true);
                         tfJugador4.setVisible(false);
+                        jLabel3.setVisible(true);
                     } else if (contador == 4) {
                         btnNumJugador.setText("4");
                         tfJugador4.setVisible(true);
+                        jLabel4.setVisible(true);
                     }
                 if (contador == 2) {
                         btnNumJugador.setText("2");
                         tfJugador3.setVisible(false);
                         tfJugador4.setVisible(false);
+                        jLabel3.setVisible(false);
+                        jLabel4.setVisible(false);
                     }
                 }
                  
@@ -101,6 +119,12 @@ public class MultiLogin extends javax.swing.JFrame {
         tfJugador4 = new javax.swing.JTextField();
         btnNumJugador = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         jTextField1.setText("jTextField1");
 
@@ -110,11 +134,17 @@ public class MultiLogin extends javax.swing.JFrame {
 
         chekbHistoria.setText("Historia");
 
-        chekbCiencia.setText("Ciencia");
+        chekbCiencia.setText("Ciencia y tecnologia");
+        chekbCiencia.setToolTipText("");
+        chekbCiencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chekbCienciaActionPerformed(evt);
+            }
+        });
 
         chekbSorpresa.setText("Sorpresa");
 
-        lblIngrese.setText("Ingrese la cantidad de jugadores");
+        lblIngrese.setText("Dele click para escoger la cantidad de jugadores");
 
         tfJugador1.setText("Jugador");
 
@@ -133,74 +163,114 @@ public class MultiLogin extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Añadir Jugadores");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Jugador 1:");
+
+        jLabel2.setText("Jugador 2:");
+
+        jLabel3.setText("Jugador 3:");
+
+        jLabel4.setText("Jugador 4:");
+
+        jLabel5.setText("Unicamente puedes usar letras y numeros");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(chekbCiencia)
-                        .addGap(59, 59, 59)
-                        .addComponent(btnSiguiente)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(35, 35, 35)
+                                .addComponent(tfJugador3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tfJugador1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(chekbSorpresa))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tfJugador4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(tfJugador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(chekbCine)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(chekbHistoria)))
+                        .addComponent(chekbHistoria))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(chekbCiencia)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(chekbSorpresa))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(93, 93, 93)
+                        .addComponent(jLabel5)
+                        .addGap(0, 62, Short.MAX_VALUE)))
                 .addGap(49, 49, 49))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(tfJugador3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfJugador1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfJugador2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfJugador4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblIngrese)
                 .addGap(73, 73, 73))
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(lblIngrese))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(169, 169, 169)
-                        .addComponent(btnNumJugador)))
-                .addContainerGap(130, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(165, 165, 165))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnSiguiente)
+                        .addGap(187, 187, 187))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnNumJugador)
+                        .addGap(201, 201, 201))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblIngrese)
                 .addGap(15, 15, 15)
+                .addComponent(lblIngrese)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnNumJugador)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfJugador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfJugador1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfJugador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfJugador3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfJugador4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfJugador4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addGap(40, 40, 40)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chekbHistoria)
+                    .addComponent(chekbCine))
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(chekbCine)
-                    .addComponent(chekbHistoria))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(chekbCiencia)
-                            .addComponent(chekbSorpresa))
-                        .addGap(35, 35, 35))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSiguiente)
-                        .addGap(19, 19, 19))))
+                    .addComponent(chekbCiencia)
+                    .addComponent(chekbSorpresa))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSiguiente)
+                .addGap(10, 10, 10))
         );
 
         pack();
@@ -324,6 +394,85 @@ public class MultiLogin extends javax.swing.JFrame {
         System.out.println(categoria);
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
+    private boolean validateName(String username){
+        String regex = "^[a-zA-Z0-9]+$";
+
+        // Verificar si el nombre del jugador cumple con la expresión regular
+        if ((username.matches(regex))){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(tfJugador1.isVisible()){
+            nombreJugador1 = tfJugador1.getText();
+            Jugador jugadorAgregar = new Jugador(nombreJugador1);
+            if(validateName(nombreJugador1)){
+                listaDeJugadores.add(jugadorAgregar);
+            }else {
+            // El nombre del jugador no es válido
+            tfJugador1.setText("");
+            tfJugador2.setText("");
+            tfJugador3.setText("");
+            tfJugador4.setText("");
+            jLabel5.setForeground(Color.RED);
+            }    
+        } else if(tfJugador2.isVisible()){
+            nombreJugador2 = tfJugador2.getText();
+            Jugador jugadorAgregar = new Jugador(nombreJugador2);
+            if(validateName(nombreJugador2)){
+                listaDeJugadores.add(jugadorAgregar);
+            }else {
+            // El nombre del jugador no es válido
+            tfJugador1.setText("");
+            tfJugador2.setText("");
+            tfJugador3.setText("");
+            tfJugador4.setText("");
+            jLabel5.setForeground(Color.RED);
+            }    
+        } else if(tfJugador3.isVisible()){
+            nombreJugador3 = tfJugador3.getText();
+            Jugador jugadorAgregar = new Jugador(nombreJugador3);
+            if(validateName(nombreJugador3)){
+                listaDeJugadores.add(jugadorAgregar);
+            }else {
+            // El nombre del jugador no es válido
+            System.out.println("Nombre del jugador no válido. Solo se permiten letras y números.");
+            tfJugador1.setText("");
+            tfJugador2.setText("");
+            tfJugador3.setText("");
+            tfJugador4.setText("");
+            jLabel5.setForeground(Color.RED);
+            }    
+        } else if(tfJugador4.isVisible()){
+            nombreJugador4 = tfJugador4.getText();
+            Jugador jugadorAgregar = new Jugador(nombreJugador2);
+            if(validateName(nombreJugador4)){
+                listaDeJugadores.add(jugadorAgregar);
+            } else {
+            // El nombre del jugador no es válido
+            tfJugador1.setText("");
+            tfJugador2.setText("");
+            tfJugador3.setText("");
+            tfJugador4.setText("");
+            jLabel5.setForeground(Color.RED);
+            }    
+        }
+        if(listaDeJugadores.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Debe Llenar los campos de los jugadores", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        } else {
+            return ;    
+        }
+        
+  
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void chekbCienciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chekbCienciaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chekbCienciaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -367,6 +516,12 @@ public class MultiLogin extends javax.swing.JFrame {
     private javax.swing.JCheckBox chekbCine;
     private javax.swing.JCheckBox chekbHistoria;
     private javax.swing.JCheckBox chekbSorpresa;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblIngrese;
     private javax.swing.JTextField tfJugador1;
