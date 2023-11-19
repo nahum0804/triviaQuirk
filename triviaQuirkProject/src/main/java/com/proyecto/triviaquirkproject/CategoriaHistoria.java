@@ -105,7 +105,7 @@ public class CategoriaHistoria implements iCategorias {
             String respuestaB = preguntaAleatoria.getRespuestaB();
             String respuestaC = preguntaAleatoria.getRespuestaC();
             byte respuestaCorrecta = preguntaAleatoria.getRespuestaCorrecta();
-            Pregunta preguntaSolicitada = new Pregunta(numeroAleatorio, pregunta, respuestaA, respuestaB, respuestaC, respuestaCorrecta);
+            PreguntaHistoria preguntaSolicitada = new PreguntaHistoria(numeroAleatorio, pregunta, respuestaA, respuestaB, respuestaC, respuestaCorrecta);
             return preguntaSolicitada;
         }
     }

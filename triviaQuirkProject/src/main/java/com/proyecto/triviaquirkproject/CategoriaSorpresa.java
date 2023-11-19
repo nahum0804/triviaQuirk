@@ -99,7 +99,7 @@ public class CategoriaSorpresa implements iCategorias{
             String respuestaB = preguntaAleatoria.getOpcion2();
             String respuestaC = preguntaAleatoria.getOpcion3();
             byte respuestaCorrecta = preguntaAleatoria.getRespuestaCorrecta();
-            Pregunta preguntaSolicitada = new Pregunta(numeroAleatorio, pregunta, respuestaA, respuestaB, respuestaC, respuestaCorrecta);
+            PreguntaSorpresa preguntaSolicitada = new PreguntaSorpresa(numeroAleatorio, pregunta, respuestaA, respuestaB, respuestaC, respuestaCorrecta);
             return preguntaSolicitada;
         }
     }

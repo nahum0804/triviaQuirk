@@ -26,6 +26,8 @@ import poo.proyecto2.triviaquirk.iSuscriptorPreguntas;
  */
 public class StartGame extends javax.swing.JFrame {
     
+    CategoriaHistoria cat;
+    Partida partida;
     private ArrayList<String> categoriasEscogidas;
     private ArrayList<Jugador> jugadores;
     private Timer timer;
@@ -38,6 +40,12 @@ public class StartGame extends javax.swing.JFrame {
      * Creates new form StartGame
      */
     public StartGame() {
+        //this.cat = cat;
+        //this.partida = partida;
+        System.out.println("Ya estás en el juego");
+        System.out.println("Datos de partida:");
+        System.out.println("Partida: "); //+ partida.numeroPartida);
+        System.out.println("Usernames: "); //+ partida.listadoJugadores);
         initComponents();     
         tiempoRestante = 20; // establece el tiempo inicial en segundos
         jLabelTime.setText(Integer.toString(tiempoRestante));
@@ -69,7 +77,6 @@ public class StartGame extends javax.swing.JFrame {
         });
         timer.start();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -240,8 +247,50 @@ public class StartGame extends javax.swing.JFrame {
         // Asegurar que el índice del jugador no rebase el tamaño del arreglo
         indiceJugador = indiceJugador % jugadores.size();
         jLabelUserName.setText(jugadores.get(indiceJugador).obtenerNombreJugador());
+        
+        setPregunta("¿Listo para empezar?");
+        setOpcionA("Un poquito");
+        setOpcionB("Totalmente si");
+        setOpcionC("No");
     }
     
+    /**
+     * Set label de pregunta
+     * @param pregunta 
+     */
+    public void setPregunta(String pregunta) {
+        lblGuardarPregunta.setText(pregunta);
+    }
+
+    /**
+     * Set or add opcion A de la pregunta
+     * @param opcionA 
+     */
+    public void setOpcionA(String opcionA) {
+        btnOpcionA.setText(opcionA);
+    }
+
+    /**
+     * Set or add opcion B de la pregunta
+     * @param opcionB
+     */
+    public void setOpcionB(String opcionB) {
+        btnOpcionB.setText(opcionB);
+    }
+
+    /**
+     * Set or add opcion C de la pregunta
+     * @param opcionC
+     */
+    public void setOpcionC(String opcionC) {
+        btnOpcionC.setText(opcionC);
+    }
+    
+    
+    /**
+     * Show button selected
+     * @param boton 
+     */
     private void resaltarBoton(JButton boton) {
         // Almacenar el borde original del botón
         Border bordeOriginal = boton.getBorder();
@@ -255,8 +304,10 @@ public class StartGame extends javax.swing.JFrame {
         btnOpcionC.setEnabled(false);
         jButtonSiguiente.setEnabled(false);
 
+        timer.stop();
+        
         // Crear un Timer para manejar la pausa y la animación
-        Timer timer = new Timer(2000, new ActionListener() {
+        Timer animacionTimer  = new Timer(2000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Restaurar el borde original del botón
@@ -271,13 +322,15 @@ public class StartGame extends javax.swing.JFrame {
                 // Continuar con la siguiente pregunta
                 siguientePregunta();
 
+                timer.start();
+                
                 // Detener el Timer después de una ejecución
                 ((Timer) e.getSource()).stop();
             }
         });
 
-        // Iniciar el Timer
-        timer.start();
+        // Iniciar el Timer de animación
+        animacionTimer.start();
     }
 
     
@@ -307,7 +360,6 @@ public class StartGame extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(StartGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

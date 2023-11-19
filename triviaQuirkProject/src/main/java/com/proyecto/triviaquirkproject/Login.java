@@ -7,6 +7,8 @@ package com.proyecto.triviaquirkproject;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
+import poo.proyecto2.triviaquirk.iJugador;
 
 /**
  *
@@ -17,6 +19,9 @@ public class Login extends javax.swing.JFrame {
     private ButtonGroup buttonGroup;
     private ArrayList<String> categoriasSeleccionadas; 
     String nombreJugador;
+    CategoriaHistoria categoriaInstancia = new CategoriaHistoria().getInstance();
+    private Partida partidaActual;
+    private int numeroPartida;
     //private CategoriaHistoria catHistoria = new CategoriaHistoria().getInstance();
     //private CategoriaCine catCine = new CategoriaCine().getInstance();
     //private CategoriaSorpresa catSorpresa = new CategoriaSorpresa().getInstancia();
@@ -173,7 +178,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_tfInputNombreActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-        String nombreJugador = tfInputNombre.getText();
+        nombreJugador = tfInputNombre.getText();
 
         // Expresión regular para validar que solo hay letras, números y espacios
         String regex = "^[a-zA-Z0-9]+$";
@@ -238,12 +243,16 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(categoriasSeleccionadas.isEmpty()){
-            System.out.println("Debe escoger al menos una categoria de preguntas para poder jugar");
+            JOptionPane.showMessageDialog(this, "Debe escoger al menos una categoría de preguntas para poder jugar", "Advertencia", JOptionPane.WARNING_MESSAGE);
         } else {
-            this.dispose();
-            System.out.println("Listo!");
-            StartGame game = new StartGame();
-            game.setVisible(true);
+            //this.dispose();
+            numeroPartida = categoriaInstancia.registrarPartida();
+            partidaActual = new Partida(numeroPartida); // Instancia unica - Singleton
+            System.out.println(nombreJugador);
+            Jugador jugadorActual = new Jugador(nombreJugador);
+            partidaActual.addJugador(jugadorActual);
+    
+            PlayGame jugar = new PlayGame(categoriasSeleccionadas, partidaActual);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -19,15 +19,15 @@ import poo.proyecto2.triviaquirk.iPregunta;
  *
  * @author Usuario
  */
-public class Pregunta implements iPregunta{
-     private final int numeroPregunta;
+public class PreguntaSorpresa implements iPregunta {
+    private final int numeroPregunta;
     private final String descripcion;
     private final String respuesta1;
     private final String respuesta2;
     private final String respuesta3;
     private final byte respuestaCorrecta;
 
-    public Pregunta(int numeroPregunta, String descripcion, String respuesta1, String respuesta2, String respuesta3, byte respuestaCorrecta) {
+    public PreguntaSorpresa(int numeroPregunta, String descripcion, String respuesta1, String respuesta2, String respuesta3, byte respuestaCorrecta) {
         this.numeroPregunta = numeroPregunta;
         this.descripcion = descripcion;
         this.respuesta1 = respuesta1;
@@ -58,10 +58,10 @@ public class Pregunta implements iPregunta{
 
     @Override
     public byte esCorrecta(byte opcionElegida) throws excepcionRangoMayor, FileNotFoundException {
-        CategoriaCine hc = CategoriaCine.getInstance();
+        CategoriaSorpresa hc = (CategoriaSorpresa) CategoriaSorpresa.getInstance();
         byte valor = 0;
         boolean encontrado = false;
-        FileInputStream fileIn = new FileInputStream("HCEstadistica.dat");
+        FileInputStream fileIn = new FileInputStream("PreguntaSorpresaEstadistica.dat");
 
         try {
             ObjectInputStream in = new ObjectInputStream(fileIn);
@@ -132,6 +132,7 @@ public class Pregunta implements iPregunta{
         return valor;
     }
 
+     @Override
     public void falloPorTiempoRespuesta(byte opcionElegida) throws excepcionRangoMayor, FileNotFoundException {
         this.esCorrecta(opcionElegida);
         System.out.println("La respuesta no fue indicada y se auto-evalupor vencimiento del tiempo de respuesta");
