@@ -7,11 +7,15 @@ package com.proyecto.triviaquirkproject;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
+import poo.proyecto2.triviaquirk.excepciones.excepcionPreguntasNoDisponibles;
 import poo.proyecto2.triviaquirk.iJugador;
+import poo.proyecto2.triviaquirk.iPregunta;
 
 /**
  *
@@ -25,15 +29,21 @@ public class PlayGame extends JFrame {
     private JLabel lblJugador;
     private JLabel lblNumeroPartida;
     private int numJugadores;
+    private Categoria catPadre;
+    private ArrayList<Categoria> categoriasJugar = new ArrayList<>();;
 
-      public PlayGame(ArrayList<String> listaCategorias, Partida partida) {
+      public PlayGame(Categoria catPadre, Partida partida) {
         this.listaCategorias = listaCategorias;
         this.partida = partida;
         this.numJugadores = partida.listadoJugadores.size();
-
+        this.catPadre = catPadre;
+        
+          System.out.println(partida.numeroPartida + " desde el constructor");
+   
+        
         // Configuración de la ventana
         setTitle("Inicio de Juego");
-        setSize(300, 200);
+        setSize(300, 250);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null); // Usar un administrador de diseño más avanzado si es necesario
 
@@ -56,8 +66,11 @@ public class PlayGame extends JFrame {
         btnIniciar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Aquí puedes agregar la lógica para iniciar el juego
-                iniciarJuego();
+                try {
+                    iniciarJuego();
+                } catch (excepcionPreguntasNoDisponibles ex) {
+                    Logger.getLogger(PlayGame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         add(btnIniciar);
@@ -66,11 +79,33 @@ public class PlayGame extends JFrame {
         setVisible(true);
     }
 
-    private void iniciarJuego() {
-        // Aquí puedes agregar la lógica para iniciar el juego
-        // Por ejemplo, puedes abrir la ventana de la clase StartGame
-        StartGame startGame = new StartGame();
-        startGame.setVisible(true);
+    private void iniciarJuego() throws excepcionPreguntasNoDisponibles {
+        ArrayList<String> listaDeCategorias = catPadre.obtenerCategorias();
+        for(String i : listaDeCategorias){
+            Categoria catTemp = new Categoria().getInstance();
+            catTemp.asignarCategoria(i);
+            categoriasJugar.add(catTemp);
+        }
+        
+        // Jugar según la cantidad de categorías
+        for (Categoria ctTemp : categoriasJugar) {
+            // Registrar la partida y obtener el número de partida
+            int numeroPartida = ctTemp.registrarPartida();
+
+            // Obtener pregunta aleatoria para la partida actual
+            iPregunta pregunta = ctTemp.obtenerPreguntaAleatoria(numeroPartida);
+            
+            for(iJugador j : partida.listadoJugadores){
+                // Crear y mostrar la ventana StartGame
+                StartGame startGame = new StartGame();
+                startGame.setLblUserName(j.obtenerNombreJugador());
+                startGame.setPregunta(pregunta.obtenerDescripcion());
+                startGame.setOpcionA(pregunta.obtenerRespuesta1());
+                startGame.setOpcionB(pregunta.obtenerRespuesta2());
+                startGame.setOpcionC(pregunta.obtenerRespuesta3());
+                startGame.setVisible(true);
+            }
+        }
 
         // Cierra la ventana actual
         dispose();

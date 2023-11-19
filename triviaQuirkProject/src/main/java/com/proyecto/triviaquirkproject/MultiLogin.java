@@ -24,6 +24,7 @@ import javax.swing.JTextField;
  */
 public class MultiLogin extends javax.swing.JFrame {
     int contador = 4;
+    private Partida partidaActual;
     private String nombreJugador1;
     private String nombreJugador2;
     private String nombreJugador3;
@@ -31,30 +32,26 @@ public class MultiLogin extends javax.swing.JFrame {
     private ArrayList<Jugador> listaDeJugadores;
     private int numeroPartida;
     Categoria categoriaInstancia = new Categoria().getInstance();
-
+    private ArrayList<String> categoriasSeleccionadas; 
     
     /**
      * Creates new form MultiLogin
      */
    
     public MultiLogin() {
+        categoriasSeleccionadas = new ArrayList<>();
         listaDeJugadores = new ArrayList<>();
         initComponents();
-        //colocar los checkb en un gruo para que solo se seleccione uno
-        ButtonGroup bg = new ButtonGroup();
-        bg.add(chekbCine);
-        bg.add(chekbHistoria);
-        bg.add(chekbCiencia);
-        bg.add(chekbSorpresa);
-        tfJugador3.setVisible(false);
-        tfJugador4.setVisible(false);
+       
+        tfJugador3.setVisible(true);
+        tfJugador4.setVisible(true);
         btnSiguiente.setVisible(false);
         chekbCine.setVisible(false);
         chekbHistoria.setVisible(false);
         chekbSorpresa.setVisible(false);
         chekbCiencia.setVisible(false);
-        jLabel3.setVisible(false);
-        jLabel4.setVisible(false);
+        jLabel3.setVisible(true);
+        jLabel4.setVisible(true);
         btnNumJugador.setText("4");
         
         //Crear un contador que empiece en 2
@@ -131,8 +128,18 @@ public class MultiLogin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         chekbCine.setText("Cine");
+        chekbCine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chekbCineActionPerformed(evt);
+            }
+        });
 
         chekbHistoria.setText("Historia");
+        chekbHistoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chekbHistoriaActionPerformed(evt);
+            }
+        });
 
         chekbCiencia.setText("Ciencia y tecnologia");
         chekbCiencia.setToolTipText("");
@@ -143,6 +150,11 @@ public class MultiLogin extends javax.swing.JFrame {
         });
 
         chekbSorpresa.setText("Sorpresa");
+        chekbSorpresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chekbSorpresaActionPerformed(evt);
+            }
+        });
 
         lblIngrese.setText("Dele click para escoger la cantidad de jugadores");
 
@@ -392,13 +404,33 @@ public class MultiLogin extends javax.swing.JFrame {
             categoria = "Sorpresa";
         }
         System.out.println(categoria);
+        if(categoriasSeleccionadas.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Debe escoger al menos una categoría de preguntas para poder jugar", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        } else {
+            //this.dispose();
+            numeroPartida = categoriaInstancia.registrarPartida();
+            partidaActual = new Partida(numeroPartida); // Instancia unica - Singleton
+            for (Jugador jugadorActual : listaDeJugadores) {
+                partidaActual.addJugador(jugadorActual);
+            }
+            for(String categorie : categoriasSeleccionadas){
+                categoriaInstancia.agregarCategorias(categorie);
+            }
+            
+            PlayGame jugar = new PlayGame(categoriaInstancia, partidaActual);  
+           
+        }
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private boolean validateName(String username){
         String regex = "^[a-zA-Z0-9]+$";
 
         // Verificar si el nombre del jugador cumple con la expresión regular
+        
         if ((username.matches(regex))){
+            if (username.matches("Jugador")){
+            return false;
+            }       
             return true;
         } else {
             return false;
@@ -406,8 +438,10 @@ public class MultiLogin extends javax.swing.JFrame {
     }
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       
         if(tfJugador1.isVisible()){
             nombreJugador1 = tfJugador1.getText();
+            System.out.println(nombreJugador1);
             Jugador jugadorAgregar = new Jugador(nombreJugador1);
             if(validateName(nombreJugador1)){
                 listaDeJugadores.add(jugadorAgregar);
@@ -419,7 +453,8 @@ public class MultiLogin extends javax.swing.JFrame {
             tfJugador4.setText("");
             jLabel5.setForeground(Color.RED);
             }    
-        } else if(tfJugador2.isVisible()){
+        } 
+        if(tfJugador2.isVisible()){
             nombreJugador2 = tfJugador2.getText();
             Jugador jugadorAgregar = new Jugador(nombreJugador2);
             if(validateName(nombreJugador2)){
@@ -432,7 +467,8 @@ public class MultiLogin extends javax.swing.JFrame {
             tfJugador4.setText("");
             jLabel5.setForeground(Color.RED);
             }    
-        } else if(tfJugador3.isVisible()){
+        } 
+        if(tfJugador3.isVisible()){
             nombreJugador3 = tfJugador3.getText();
             Jugador jugadorAgregar = new Jugador(nombreJugador3);
             if(validateName(nombreJugador3)){
@@ -446,7 +482,8 @@ public class MultiLogin extends javax.swing.JFrame {
             tfJugador4.setText("");
             jLabel5.setForeground(Color.RED);
             }    
-        } else if(tfJugador4.isVisible()){
+        }
+        if(tfJugador4.isVisible()){
             nombreJugador4 = tfJugador4.getText();
             Jugador jugadorAgregar = new Jugador(nombreJugador2);
             if(validateName(nombreJugador4)){
@@ -463,6 +500,26 @@ public class MultiLogin extends javax.swing.JFrame {
         if(listaDeJugadores.isEmpty()){
             JOptionPane.showMessageDialog(this, "Debe Llenar los campos de los jugadores", "Advertencia", JOptionPane.WARNING_MESSAGE);
         } else {
+            System.out.println("AquiToy con elementos");
+            jLabel5.setForeground(Color.BLACK);
+            tfJugador1.setVisible(false);
+            tfJugador2.setVisible(false);
+            tfJugador3.setVisible(false);
+            tfJugador4.setVisible(false);
+            jLabel1.setVisible(false);
+            jLabel2.setVisible(false);
+            jLabel3.setVisible(false);
+            jLabel4.setVisible(false);
+            jLabel5.setVisible(false);
+            jButton1.setVisible(false);
+            chekbCine.setVisible(true);
+            chekbHistoria.setVisible(true);
+            chekbSorpresa.setVisible(true);
+            chekbCiencia.setVisible(true);
+            btnSiguiente.setVisible(true);
+            lblIngrese.setVisible(false);
+            btnNumJugador.setVisible(false);
+            
             return ;    
         }
         
@@ -471,7 +528,39 @@ public class MultiLogin extends javax.swing.JFrame {
 
     private void chekbCienciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chekbCienciaActionPerformed
         // TODO add your handling code here:
+        if(chekbCiencia.isSelected()){
+            categoriasSeleccionadas.add("Ciencia y Tecnologia");
+        } else {
+            categoriasSeleccionadas.remove("Ciencia y Tecnologia");
+        }
     }//GEN-LAST:event_chekbCienciaActionPerformed
+
+    private void chekbCineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chekbCineActionPerformed
+        // TODO add your handling code here:
+        if(chekbCine.isSelected()){
+            categoriasSeleccionadas.add("Cine");
+        } else {
+            categoriasSeleccionadas.remove("Cine");
+        }
+    }//GEN-LAST:event_chekbCineActionPerformed
+
+    private void chekbHistoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chekbHistoriaActionPerformed
+        // TODO add your handling code here:
+        if(chekbHistoria.isSelected()){
+            categoriasSeleccionadas.add("Historia");
+        } else {
+            categoriasSeleccionadas.remove("Historia");
+        }
+    }//GEN-LAST:event_chekbHistoriaActionPerformed
+
+    private void chekbSorpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chekbSorpresaActionPerformed
+        // TODO add your handling code here:
+        if(chekbSorpresa.isSelected()){
+            categoriasSeleccionadas.add("Sorpresa");
+        } else {
+            categoriasSeleccionadas.remove("Sorpresa");
+        }
+    }//GEN-LAST:event_chekbSorpresaActionPerformed
 
     /**
      * @param args the command line arguments

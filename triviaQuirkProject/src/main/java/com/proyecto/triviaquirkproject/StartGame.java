@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.Timer;
 import javax.swing.border.Border;
 import poo.proyecto2.triviaquirk.excepciones.excepcionPartidaNoDisponible;
@@ -40,23 +41,12 @@ public class StartGame extends javax.swing.JFrame {
      * Creates new form StartGame
      */
     public StartGame() {
-        //this.cat = cat;
-        //this.partida = partida;
-        System.out.println("Ya estás en el juego");
-        System.out.println("Datos de partida:");
-        System.out.println("Partida: "); //+ partida.numeroPartida);
-        System.out.println("Usernames: "); //+ partida.listadoJugadores);
         initComponents();     
         tiempoRestante = 20; // establece el tiempo inicial en segundos
         jLabelTime.setText(Integer.toString(tiempoRestante));
-        
-        jugadores = new ArrayList<>();
-        jugadores.add(new Jugador("Jugador1"));
-        jugadores.add(new Jugador("Jugador2"));
-        jugadores.add(new Jugador("Jugador3"));
 
         // Mostrar el nombre del primer jugador en la etiqueta
-        jLabelUserName.setText(jugadores.get(indiceJugador).obtenerNombreJugador());
+        jLabelUserName.setText("player");
         
         /**
          * Funcion para llevar el temporizador
@@ -72,6 +62,7 @@ public class StartGame extends javax.swing.JFrame {
                     // El tiempo ha llegado a cero, realiza la acción deseada (en este caso, cierra la ventana)
                     timer.stop();
                     dispose();
+                    // Salta a la siguiente pregunta
                 }
             }
         });
@@ -176,7 +167,7 @@ public class StartGame extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabelUserName)))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(570, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,25 +202,27 @@ public class StartGame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        System.out.println("Acabo la partida");
         timer.stop();
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnOpcionAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionAActionPerformed
         resaltarBoton(btnOpcionA);
+        respuestaEscogida = "";
         respuestaEscogida = "A";
         System.out.println(respuestaEscogida);
     }//GEN-LAST:event_btnOpcionAActionPerformed
 
     private void btnOpcionBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionBActionPerformed
         resaltarBoton(btnOpcionB);
+        respuestaEscogida = "";
         respuestaEscogida = "B";
         System.out.println(respuestaEscogida);
     }//GEN-LAST:event_btnOpcionBActionPerformed
 
     private void btnOpcionCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionCActionPerformed
         resaltarBoton(btnOpcionC);
+        respuestaEscogida = "";
         respuestaEscogida = "C";
         System.out.println(respuestaEscogida);
     }//GEN-LAST:event_btnOpcionCActionPerformed
@@ -239,19 +232,7 @@ public class StartGame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSiguienteActionPerformed
 
     private void siguientePregunta(){
-        System.out.println("Siguiente pregunta");
-        tiempoRestante = 21;
-        indicePregunta++;
-        indiceJugador++;
-        
-        // Asegurar que el índice del jugador no rebase el tamaño del arreglo
-        indiceJugador = indiceJugador % jugadores.size();
-        jLabelUserName.setText(jugadores.get(indiceJugador).obtenerNombreJugador());
-        
-        setPregunta("¿Listo para empezar?");
-        setOpcionA("Un poquito");
-        setOpcionB("Totalmente si");
-        setOpcionC("No");
+        this.dispose();
     }
     
     /**
@@ -284,6 +265,10 @@ public class StartGame extends javax.swing.JFrame {
      */
     public void setOpcionC(String opcionC) {
         btnOpcionC.setText(opcionC);
+    }
+    
+    public void setLblUserName(String username) {
+        jLabelUserName.setText(username);
     }
     
     

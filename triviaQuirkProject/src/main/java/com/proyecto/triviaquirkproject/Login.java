@@ -227,9 +227,9 @@ public class Login extends javax.swing.JFrame {
 
     private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
         if(jCheckBox3.isSelected()){
-            categoriasSeleccionadas.add("Ciencia y Tecnologia");
+            categoriasSeleccionadas.add("Ciencia Y Tecnologia");
         } else {
-            categoriasSeleccionadas.remove("Ciencia y Tecnologia");
+            categoriasSeleccionadas.remove("Ciencia Y Tecnologia");
         }
     }//GEN-LAST:event_jCheckBox3ActionPerformed
 
@@ -250,8 +250,12 @@ public class Login extends javax.swing.JFrame {
             partidaActual = new Partida(numeroPartida); // Instancia unica - Singleton
             Jugador jugadorActual = new Jugador(nombreJugador);
             partidaActual.addJugador(jugadorActual);
-    
-            PlayGame jugar = new PlayGame(categoriasSeleccionadas, partidaActual);
+            
+            for(String categorie : categoriasSeleccionadas){
+                categoriaInstancia.agregarCategorias(categorie);
+            }
+            
+            PlayGame jugar = new PlayGame(categoriaInstancia, partidaActual);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

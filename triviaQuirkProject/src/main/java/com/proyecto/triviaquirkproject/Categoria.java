@@ -25,6 +25,8 @@ public class Categoria implements iCategorias {
     private final ArrayList<Partida> partidasActivas = new ArrayList();
     private static Categoria instancia;
     private int numeroDeElementos;
+    private ArrayList<String> categoriasEscogidas = new ArrayList<>();
+    private ArrayList<iPregunta> preguntasUsadas;
     
     public Categoria getInstance(){
         return instancia == null ? new Categoria() : instancia;
@@ -78,32 +80,45 @@ public class Categoria implements iCategorias {
         byte respuestaCorrecta = 0;                                                                 
         
         //Verificar la categoria escogida
-        if(this.nombreCategoria.equals("Sorpresa")){
-            GodOfWarTriviaQuestions[] elementos = GodOfWarTriviaQuestions.values();
-            numeroDeElementos = elementos.length;
-        } else if(this.nombreCategoria.equals("Ciencia Y Tecnologia")){
-            TriviaPreguntaTecnologiaYCiencia[] elementos = TriviaPreguntaTecnologiaYCiencia.values();
-            numeroDeElementos = elementos.length;
-        } else if(this.nombreCategoria.equals("Cine")){
-            TriviaPreguntaCine[] elementos = TriviaPreguntaCine.values();
-            numeroDeElementos = elementos.length;
-        } else if(this.nombreCategoria.equals("Historia")){
-            TriviaPreguntaHistoria[] elementos = TriviaPreguntaHistoria.values();
-            numeroDeElementos = elementos.length;
-        } else {
-            System.out.println("");
+        switch (this.nombreCategoria) {
+            case "Sorpresa":
+                {
+                    GodOfWarTriviaQuestions[] elementos = GodOfWarTriviaQuestions.values();
+                    numeroDeElementos = elementos.length;
+                    break;
+                }
+            case "Ciencia Y Tecnologia":
+                {
+                    TriviaPreguntaTecnologiaYCiencia[] elementos = TriviaPreguntaTecnologiaYCiencia.values();
+                    numeroDeElementos = elementos.length;
+                    break;
+                }
+            case "Cine":
+                {
+                    TriviaPreguntaCine[] elementos = TriviaPreguntaCine.values();
+                    numeroDeElementos = elementos.length;
+                    break;
+                }
+            case "Historia":
+                {
+                    TriviaPreguntaHistoria[] elementos = TriviaPreguntaHistoria.values();
+                    numeroDeElementos = elementos.length;
+                    break;
+                }
+            default:
+                break;
         }
         
         
         Partida partida = null;
-
         for(int i = 0; i < this.partidasActivas.size(); ++i) {
             if (((Partida)this.partidasActivas.get(i)).getNumeroPartida() == numeroPartida) {
                 partida = (Partida)this.partidasActivas.get(i);
                 break;
             }
         }
-
+        
+       //assert partida != null;
         if (numeroDeElementos <= partida.numeroPreguntasRealizadas.size()) {
             throw new excepcionPreguntasNoDisponibles();
         } else {
@@ -116,42 +131,53 @@ public class Categoria implements iCategorias {
             //Se utiliza TriviaPreguntaCine para cargar las preguntas de Cine
             partida.numeroPreguntasRealizadas.add(numeroAleatorio);
             
-            if(this.nombreCategoria.equals("Sorpresa")){
-                GodOfWarTriviaQuestions[] preguntas = GodOfWarTriviaQuestions.values();
-                GodOfWarTriviaQuestions preguntaAleatoria = preguntas[numeroAleatorio];
-                pregunta = preguntaAleatoria.getPregunta();
-                respuestaA = preguntaAleatoria.getOpcion1();
-                respuestaB = preguntaAleatoria.getOpcion2();
-                respuestaC = preguntaAleatoria.getOpcion3();
-                respuestaCorrecta = preguntaAleatoria.getRespuestaCorrecta();
-                
-            } else if(this.nombreCategoria.equals("Ciencia Y Tecnologia")){
-                TriviaPreguntaTecnologiaYCiencia[] preguntas = TriviaPreguntaTecnologiaYCiencia.values();
-                TriviaPreguntaTecnologiaYCiencia preguntaAleatoria = preguntas[numeroAleatorio];
-                pregunta = preguntaAleatoria.getPregunta();
-                respuestaA = preguntaAleatoria.getRespuestaA();
-                respuestaB = preguntaAleatoria.getRespuestaB();
-                respuestaC = preguntaAleatoria.getRespuestaC();
-                respuestaCorrecta = preguntaAleatoria.getRespuestaCorrecta();
-                
-            } else if(this.nombreCategoria.equals("Cine")){
-                TriviaPreguntaCine[] preguntas = TriviaPreguntaCine.values();
-                TriviaPreguntaCine preguntaAleatoria = preguntas[numeroAleatorio];
-                pregunta = preguntaAleatoria.getPregunta();
-                respuestaA = preguntaAleatoria.getRespuestaA();
-                respuestaB = preguntaAleatoria.getRespuestaB();
-                respuestaC = preguntaAleatoria.getRespuestaC();
-                respuestaCorrecta = preguntaAleatoria.getRespuestaCorrecta();
-                
-            } else if(this.nombreCategoria.equals("Historia")){
-                TriviaPreguntaHistoria[] preguntas = TriviaPreguntaHistoria.values();
-                TriviaPreguntaHistoria preguntaAleatoria = preguntas[numeroAleatorio];
-                pregunta = preguntaAleatoria.getPregunta();
-                respuestaA = preguntaAleatoria.getRespuestaA();
-                respuestaB = preguntaAleatoria.getRespuestaB();
-                respuestaC = preguntaAleatoria.getRespuestaC();
-                respuestaCorrecta = preguntaAleatoria.getRespuestaCorrecta();
-                
+            switch (this.nombreCategoria) {
+                case "Sorpresa":
+                    {
+                        GodOfWarTriviaQuestions[] preguntas = GodOfWarTriviaQuestions.values();
+                        GodOfWarTriviaQuestions preguntaAleatoria = preguntas[numeroAleatorio];
+                        pregunta = preguntaAleatoria.getPregunta();
+                        respuestaA = preguntaAleatoria.getOpcion1();
+                        respuestaB = preguntaAleatoria.getOpcion2();
+                        respuestaC = preguntaAleatoria.getOpcion3();
+                        respuestaCorrecta = preguntaAleatoria.getRespuestaCorrecta();
+                        break;
+                    }
+                case "Ciencia Y Tecnologia":
+                    {
+                        TriviaPreguntaTecnologiaYCiencia[] preguntas = TriviaPreguntaTecnologiaYCiencia.values();
+                        TriviaPreguntaTecnologiaYCiencia preguntaAleatoria = preguntas[numeroAleatorio];
+                        pregunta = preguntaAleatoria.getPregunta();
+                        respuestaA = preguntaAleatoria.getRespuestaA();
+                        respuestaB = preguntaAleatoria.getRespuestaB();
+                        respuestaC = preguntaAleatoria.getRespuestaC();
+                        respuestaCorrecta = preguntaAleatoria.getRespuestaCorrecta();
+                        break;
+                    }
+                case "Cine":
+                    {
+                        TriviaPreguntaCine[] preguntas = TriviaPreguntaCine.values();
+                        TriviaPreguntaCine preguntaAleatoria = preguntas[numeroAleatorio];
+                        pregunta = preguntaAleatoria.getPregunta();
+                        respuestaA = preguntaAleatoria.getRespuestaA();
+                        respuestaB = preguntaAleatoria.getRespuestaB();
+                        respuestaC = preguntaAleatoria.getRespuestaC();
+                        respuestaCorrecta = preguntaAleatoria.getRespuestaCorrecta();
+                        break;
+                    }
+                case "Historia":
+                    {
+                        TriviaPreguntaHistoria[] preguntas = TriviaPreguntaHistoria.values();
+                        TriviaPreguntaHistoria preguntaAleatoria = preguntas[numeroAleatorio];
+                        pregunta = preguntaAleatoria.getPregunta();
+                        respuestaA = preguntaAleatoria.getRespuestaA();
+                        respuestaB = preguntaAleatoria.getRespuestaB();
+                        respuestaC = preguntaAleatoria.getRespuestaC();
+                        respuestaCorrecta = preguntaAleatoria.getRespuestaCorrecta();
+                        break;
+                    }
+                default:
+                    break;
             }
             
             PreguntaHistoria preguntaSolicitada = new PreguntaHistoria(numeroAleatorio, pregunta, respuestaA, respuestaB, respuestaC, respuestaCorrecta);
@@ -224,5 +250,17 @@ public class Categoria implements iCategorias {
         } else {
             partida.addJugador(jugador);
         }
+    }
+    
+    public void agregarCategorias(String categoria){
+        categoriasEscogidas.add(categoria);
+    }
+    
+    public ArrayList<String> obtenerCategorias(){
+        return categoriasEscogidas;
+    }
+    
+    public void asignarCategoria(String nombreCategoria){
+        this.nombreCategoria = nombreCategoria;
     }
 }
