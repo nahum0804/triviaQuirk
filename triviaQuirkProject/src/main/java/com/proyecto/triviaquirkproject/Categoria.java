@@ -118,6 +118,7 @@ public class Categoria implements iCategorias {
             }
         }
         
+        System.out.println(partida.numeroPreguntasRealizadas);
        //assert partida != null;
         if (numeroDeElementos <= partida.numeroPreguntasRealizadas.size()) {
             throw new excepcionPreguntasNoDisponibles();
@@ -263,4 +264,10 @@ public class Categoria implements iCategorias {
     public void asignarCategoria(String nombreCategoria){
         this.nombreCategoria = nombreCategoria;
     }
+    
+    public void addPreguntaUsada(iPregunta preguntaJugada){
+            preguntasUsadas.add(preguntaJugada);
+    }
+    
+    
 }

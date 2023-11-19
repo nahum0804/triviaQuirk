@@ -209,21 +209,21 @@ public class StartGame extends javax.swing.JFrame {
     private void btnOpcionAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionAActionPerformed
         resaltarBoton(btnOpcionA);
         respuestaEscogida = "";
-        respuestaEscogida = "A";
+        respuestaEscogida = btnOpcionA.getText();
         System.out.println(respuestaEscogida);
     }//GEN-LAST:event_btnOpcionAActionPerformed
 
     private void btnOpcionBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionBActionPerformed
         resaltarBoton(btnOpcionB);
         respuestaEscogida = "";
-        respuestaEscogida = "B";
+        respuestaEscogida = btnOpcionB.getText();
         System.out.println(respuestaEscogida);
     }//GEN-LAST:event_btnOpcionBActionPerformed
 
     private void btnOpcionCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionCActionPerformed
         resaltarBoton(btnOpcionC);
-        respuestaEscogida = "";
-        respuestaEscogida = "C";
+        respuestaEscogida = " ";
+        respuestaEscogida = btnOpcionC.getText();
         System.out.println(respuestaEscogida);
     }//GEN-LAST:event_btnOpcionCActionPerformed
 
@@ -269,6 +269,21 @@ public class StartGame extends javax.swing.JFrame {
     
     public void setLblUserName(String username) {
         jLabelUserName.setText(username);
+    }
+    
+    public void setTiempoRestante(int tiempoRestante) {
+        this.tiempoRestante = tiempoRestante;
+        jLabelTime.setText(Integer.toString(tiempoRestante));
+    }
+    
+    public void detenerTemporizador() {
+        timer.stop();
+    }
+
+    public void reiniciarTemporizador() {
+        tiempoRestante = 20; // Establece el tiempo inicial en segundos
+        jLabelTime.setText(Integer.toString(tiempoRestante));
+        timer.start();
     }
     
     

@@ -7,6 +7,8 @@ package com.proyecto.triviaquirkproject;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -80,35 +82,71 @@ public class PlayGame extends JFrame {
     }
 
     private void iniciarJuego() throws excepcionPreguntasNoDisponibles {
+        
         ArrayList<String> listaDeCategorias = catPadre.obtenerCategorias();
+        // Almacena las instancias de StartGame en una cola
+        ArrayList<StartGame> juegosPendientes = new ArrayList<>();
         for(String i : listaDeCategorias){
             Categoria catTemp = new Categoria().getInstance();
             catTemp.asignarCategoria(i);
             categoriasJugar.add(catTemp);
         }
         
+        
         // Jugar según la cantidad de categorías
         for (Categoria ctTemp : categoriasJugar) {
-            // Registrar la partida y obtener el número de partida
-            int numeroPartida = ctTemp.registrarPartida();
+            // Crear y mostrar la ventana StartGame
+            for(int i = 0; i < 30; i++){
+                // Registrar la partida y obtener el número de partida
+                int numeroPartida = ctTemp.registrarPartida();
 
-            // Obtener pregunta aleatoria para la partida actual
-            iPregunta pregunta = ctTemp.obtenerPreguntaAleatoria(numeroPartida);
-            
-            for(iJugador j : partida.listadoJugadores){
-                // Crear y mostrar la ventana StartGame
-                StartGame startGame = new StartGame();
-                startGame.setLblUserName(j.obtenerNombreJugador());
-                startGame.setPregunta(pregunta.obtenerDescripcion());
-                startGame.setOpcionA(pregunta.obtenerRespuesta1());
-                startGame.setOpcionB(pregunta.obtenerRespuesta2());
-                startGame.setOpcionC(pregunta.obtenerRespuesta3());
-                startGame.setVisible(true);
+                // Obtener pregunta aleatoria para la partida actual
+                iPregunta pregunta = ctTemp.obtenerPreguntaAleatoria(numeroPartida);
+
+                for(iJugador j : partida.listadoJugadores){
+                    StartGame startGame = new StartGame();
+                    startGame.setLblUserName(j.obtenerNombreJugador());
+                    startGame.setPregunta(pregunta.obtenerDescripcion());
+                    startGame.setOpcionA(pregunta.obtenerRespuesta1());
+                    startGame.setOpcionB(pregunta.obtenerRespuesta2());
+                    startGame.setOpcionC(pregunta.obtenerRespuesta3());
+
+                    juegosPendientes.add(startGame);
+               } 
             }
+                
+            
         }
-
+        
+        
         // Cierra la ventana actual
         dispose();
+        
+
+        //Extraer la primera ventanda de juegosPendientes
+        StartGame sg = juegosPendientes.get(0);
+        sg.setVisible(true);
+        
+        sg.detenerTemporizador();
+        // Eliminar la primera ventana de juegosPendientes
+        juegosPendientes.remove(0);
+        // Agregar el WindowListener a la nueva instancia de StartGame
+        sg.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if (juegosPendientes.size() > 0) {
+                    StartGame sg = juegosPendientes.get(0);
+                    sg.setVisible(true);
+                    juegosPendientes.remove(0);
+                    
+                    sg.reiniciarTemporizador();
+                    
+                    //mostrar las siguientes unicamente cuando se cierre la anterior
+                    sg.addWindowListener(this);
+                }
+ 
+            }
+        });
     }
 
     private String obtenerNombresJugadores() {

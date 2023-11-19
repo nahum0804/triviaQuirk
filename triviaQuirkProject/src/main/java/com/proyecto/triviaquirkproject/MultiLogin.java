@@ -387,10 +387,7 @@ public class MultiLogin extends javax.swing.JFrame {
             Jugador jugador4 = new Jugador(tfJugador4.getText());
             jugadores.add(jugador4);
         }
-        //Imprimir los jugadores de la lista
-        for (Jugador jugador : jugadores) {
-            System.out.println(jugador.obtenerNombreJugador());
-        }
+
         
         //Extraer la categoría seleccionada del bg
         String categoria = "";
@@ -399,17 +396,17 @@ public class MultiLogin extends javax.swing.JFrame {
         } else if (chekbHistoria.isSelected()) {
             categoria = "Historia";
         } else if (chekbCiencia.isSelected()) {
-            categoria = "Ciencia";
+            categoria = "Ciencia Y Tecnologia";
         } else if (chekbSorpresa.isSelected()) {
             categoria = "Sorpresa";
         }
-        System.out.println(categoria);
         if(categoriasSeleccionadas.isEmpty()){
             JOptionPane.showMessageDialog(this, "Debe escoger al menos una categoría de preguntas para poder jugar", "Advertencia", JOptionPane.WARNING_MESSAGE);
         } else {
             //this.dispose();
             numeroPartida = categoriaInstancia.registrarPartida();
             partidaActual = new Partida(numeroPartida); // Instancia unica - Singleton
+            System.out.println(partidaActual.numeroPartida + " Validando en multijugador");
             for (Jugador jugadorActual : listaDeJugadores) {
                 partidaActual.addJugador(jugadorActual);
             }
