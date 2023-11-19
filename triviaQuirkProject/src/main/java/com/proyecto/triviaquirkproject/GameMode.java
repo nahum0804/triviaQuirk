@@ -42,6 +42,11 @@ public class GameMode extends javax.swing.JFrame {
         });
 
         btnMultijugador.setText("Multijugador");
+        btnMultijugador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMultijugadorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -81,6 +86,13 @@ public class GameMode extends javax.swing.JFrame {
         Login login = new Login();
         login.setVisible(true);
     }//GEN-LAST:event_btnSolitarioActionPerformed
+
+    private void btnMultijugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMultijugadorActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        MultiLogin Multilogin = new MultiLogin();
+        Multilogin.setVisible(true);
+    }//GEN-LAST:event_btnMultijugadorActionPerformed
 
     /**
      * @param args the command line arguments
