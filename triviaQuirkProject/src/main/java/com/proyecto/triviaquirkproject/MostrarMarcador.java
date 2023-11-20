@@ -15,7 +15,72 @@ public class MostrarMarcador extends javax.swing.JFrame {
      */
     public MostrarMarcador() {
         initComponents();
+        labelJugador1.setVisible(false);
+        labelJuagdor2.setVisible(false);
+        labelJugador3.setVisible(false);
+        labelJugador4.setVisible(false);
+        labelPuntajeJ1.setVisible(false);
+        labelPuntajeJ2.setVisible(false);
+        labelPuntajeJ3.setVisible(false);
+        labelPuntajeJ4.setVisible(false);
     }
+    
+    /**
+     * Establece la visibilidad del jugador 1 y su puntaje.
+     * 
+     * @param visible Indica si se debe hacer visible o no el elemento del jugador 1.
+     * @param puntaje El puntaje del jugador 1 que se mostrará.
+     * @param username El nombre de usuario del jugador 1.
+     */
+    public void setJugador1Visible(boolean visible, String puntaje, String username) {
+        labelJugador1.setVisible(visible);
+        labelPuntajeJ1.setVisible(visible);
+        labelPuntajeJ1.setText(puntaje);
+        labelJugador1.setText(username);
+    }
+
+    /**
+     * Establece la visibilidad del jugador 2 y su puntaje.
+     * 
+     * @param visible Indica si se debe hacer visible o no el elemento del jugador 2.
+     * @param puntaje El puntaje del jugador 2 que se mostrará.
+     * @param username El nombre de usuario del jugador 2.
+     */
+    public void setJugador2Visible(boolean visible, String puntaje, String username) {
+        labelJuagdor2.setVisible(visible);
+        labelPuntajeJ2.setVisible(visible);
+        labelPuntajeJ2.setText(puntaje);
+        labelJuagdor2.setText(username);
+    }
+
+    /**
+     * Establece la visibilidad del jugador 3 y su puntaje.
+     * 
+     * @param visible Indica si se debe hacer visible o no el elemento del jugador 3.
+     * @param puntaje El puntaje del jugador 3 que se mostrará.
+     * @param username El nombre de usuario del jugador 3.
+     */
+    public void setJugador3Visible(boolean visible, String puntaje, String username) {
+        labelJugador3.setVisible(visible);
+        labelPuntajeJ3.setVisible(visible);
+        labelPuntajeJ3.setText(puntaje);
+        labelJugador3.setText(username);
+    }
+
+    /**
+     * Establece la visibilidad del jugador 4 y su puntaje.
+     * 
+     * @param visible Indica si se debe hacer visible o no el elemento del jugador 4.
+     * @param puntaje El puntaje del jugador 4 que se mostrará.
+     * @param username El nombre de usuario del jugador 4.
+     */
+    public void setJugador4Visible(boolean visible, String puntaje, String username) {
+        labelJugador4.setVisible(visible);
+        labelPuntajeJ4.setVisible(visible);
+        labelPuntajeJ4.setText(puntaje);
+        labelJugador4.setText(username);
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -148,6 +213,7 @@ public class MostrarMarcador extends javax.swing.JFrame {
             }
         });
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabelTituloPuntaje;

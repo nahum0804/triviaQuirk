@@ -28,7 +28,7 @@ import poo.proyecto2.triviaquirk.iPregunta;
  */
 public class PlayGame extends JFrame {
     
-    private ArrayList<String> listaCategorias;
+   private ArrayList<String> listaCategorias;
     private Partida partida;
     private JButton btnIniciar;
     private JLabel lblJugador;
@@ -37,64 +37,53 @@ public class PlayGame extends JFrame {
     private Categoria catPadre;
     private ArrayList<Categoria> categoriasJugar = new ArrayList<>();;
 
-    /**
-     * Constructor de la clase PlayGame.
-     * 
-     * @param catPadre Categoría principal del juego.
-     * @param partida Partida actual.
-     */
-    public PlayGame(Categoria catPadre, Partida partida) {
-      this.listaCategorias = listaCategorias;
-      this.partida = partida;
-      this.numJugadores = partida.listadoJugadores.size();
-      this.catPadre = catPadre;
-
+      public PlayGame(Categoria catPadre, Partida partida) {
+        this.listaCategorias = listaCategorias;
+        this.partida = partida;
+        this.numJugadores = partida.listadoJugadores.size();
+        this.catPadre = catPadre;
+        
         System.out.println(partida.numeroPartida + " desde el constructor");
+   
+        
+        // Configuración de la ventana
+        setTitle("Inicio de Juego");
+        setSize(300, 250);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(null); // Usar un administrador de diseño más avanzado si es necesario
 
+        // Inicialización de componentes
+        JLabel lblJugador = new JLabel("Jugadores: ");
+        lblJugador.setBounds(20, 20, 250, 20);
+        add(lblJugador);
 
-      // Configuración de la ventana
-      setTitle("Inicio de Juego");
-      setSize(300, 250);
-      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      setLayout(null); // Usar un administrador de diseño más avanzado si es necesario
+        JTextArea txtAreaJugadores = new JTextArea(obtenerNombresJugadores());
+        txtAreaJugadores.setBounds(20, 40, 250, 60);
+        txtAreaJugadores.setEditable(false);
+        add(txtAreaJugadores);
 
-      // Inicialización de componentes
-      JLabel lblJugador = new JLabel("Jugadores: ");
-      lblJugador.setBounds(20, 20, 250, 20);
-      add(lblJugador);
+        lblNumeroPartida = new JLabel("Número de partida: " + partida.numeroPartida);
+        lblNumeroPartida.setBounds(20, 110, 250, 20);
+        add(lblNumeroPartida);
 
-      JTextArea txtAreaJugadores = new JTextArea(obtenerNombresJugadores());
-      txtAreaJugadores.setBounds(20, 40, 250, 60);
-      txtAreaJugadores.setEditable(false);
-      add(txtAreaJugadores);
+        btnIniciar = new JButton("Iniciar Juego");
+        btnIniciar.setBounds(20, 140, 150, 30);
+        btnIniciar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    iniciarJuego();
+                } catch (excepcionPreguntasNoDisponibles ex) {
+                    Logger.getLogger(PlayGame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        add(btnIniciar);
 
-      lblNumeroPartida = new JLabel("Número de partida: " + partida.numeroPartida);
-      lblNumeroPartida.setBounds(20, 110, 250, 20);
-      add(lblNumeroPartida);
-
-      btnIniciar = new JButton("Iniciar Juego");
-      btnIniciar.setBounds(20, 140, 150, 30);
-      btnIniciar.addActionListener(new ActionListener() {
-          @Override
-          public void actionPerformed(ActionEvent e) {
-              try {
-                  iniciarJuego();
-              } catch (excepcionPreguntasNoDisponibles ex) {
-                  Logger.getLogger(PlayGame.class.getName()).log(Level.SEVERE, null, ex);
-              }
-          }
-      });
-      add(btnIniciar);
-
-      // Mostrar la ventana
-      setVisible(true);
+        // Mostrar la ventana
+        setVisible(true);
     }
 
-    /**
-     * Inicia el juego seleccionando preguntas aleatorias de categorías.
-     * 
-     * @throws excepcionPreguntasNoDisponibles Excepción en caso de preguntas no disponibles.
-     */
     private void iniciarJuego() throws excepcionPreguntasNoDisponibles {
         
         ArrayList<String> listaDeCategorias = catPadre.obtenerCategorias();
@@ -139,14 +128,14 @@ public class PlayGame extends JFrame {
                 startGame.setOpcionA(pregunta.obtenerRespuesta1());
                 startGame.setOpcionB(pregunta.obtenerRespuesta2());
                 startGame.setOpcionC(pregunta.obtenerRespuesta3());
-
+                startGame.setNombreJugador(j.obtenerNombreJugador());
                 juegosPendientes.add(startGame);
             }
         }
         
         
         // Cierra la ventana actual
-        dispose();
+        this.dispose();
         
 
         //Extraer la primera ventanda de juegosPendientes
@@ -156,14 +145,63 @@ public class PlayGame extends JFrame {
         sg.reiniciarTemporizador();
         // Eliminar la primera ventana de juegosPendientes
         juegosPendientes.remove(0);
+        // Contador
+        
         // Agregar el WindowListener a la nueva instancia de StartGame
+       
         sg.addWindowListener(new WindowAdapter() {
+            int contador = 0;
+            String nombre = sg.getNombreJugador();
             @Override
             public void windowClosed(WindowEvent e) {
+                
+                if (contador==0){
+                    System.out.println(sg.getRespuestaEscogida());
+                    contador = contador + 1 ;
+                    String respuesta = sg.getRespuestaEscogida();
+                    System.out.println(respuesta);
+                    System.out.println(sg.getRespuestaEscogida());
+                    if (sg.getRespuestaEscogida()==respuesta){
+                        System.out.println("Nombre: "+nombre);
+                       for(iJugador j : partida.listadoJugadores){
+                           System.out.println("Nombre2: "+j.obtenerNombreJugador());
+                           if (j.obtenerNombreJugador()==nombre){
+                               short num = 1;
+                               j.aumentarPuntaje(num);
+                               System.out.println("Este es el pnt de: "+j.obtenerPuntaje());
+                           }
+                       }
+                    }
+                    
+                } 
                 if (juegosPendientes.size() > 0) {
+                    
                     System.out.println("Juegos pendientes: " + juegosPendientes.size());
                     StartGame sg = juegosPendientes.get(0);
                     sg.setVisible(true);
+                    sg.addWindowListener(new WindowAdapter() {
+                        String nombre = sg.getNombreJugador();
+                        public void windowClosed(WindowEvent e) {
+                            System.out.println(sg.getRespuestaEscogida());
+                            contador = contador + 1 ;
+                            String respuesta = sg.getRespuestaEscogida();
+                            //System.out.println(respuesta);
+                            
+                            //System.out.println(sg.getRespuestaEscogida());
+                            if (sg.getRespuestaEscogida()==respuesta){
+                                //System.out.println("Nombre: "+nombre);
+                               for(iJugador j : partida.listadoJugadores){
+                                   System.out.println("Nombre2: "+j.obtenerNombreJugador());
+                                   if (j.obtenerNombreJugador()==nombre){
+                                       short num = 1;
+                                       j.aumentarPuntaje(num);
+                                       //System.out.println("Este es el pnt de: "+j.obtenerPuntaje());
+                                   }
+                               }
+                            }
+                        }
+                    });
+                    //añadir un listener para obtener la respuesta de sg.getRespuestaEscogida()
                     juegosPendientes.remove(0);
                     
                     sg.reiniciarTemporizador();
@@ -174,13 +212,30 @@ public class PlayGame extends JFrame {
  
             }
         });
+        
+        MostrarMarcador showMarcador = new MostrarMarcador();
+        int cantJug = partida.listadoJugadores.size();
+         if (cantJug >= 1) {
+            iJugador jugTemp = partida.listadoJugadores.get(0);
+            showMarcador.setJugador1Visible(true, String.valueOf(jugTemp.obtenerPuntaje()), jugTemp.obtenerNombreJugador());
+        }
+
+        if (cantJug >= 2) {
+            iJugador jugTemp2 = partida.listadoJugadores.get(1);
+            showMarcador.setJugador2Visible(true, String.valueOf(jugTemp2.obtenerPuntaje()), jugTemp2.obtenerNombreJugador());
+        }
+
+        if (cantJug >= 3) {
+            iJugador jugTemp3 = partida.listadoJugadores.get(2);
+            showMarcador.setJugador3Visible(true, String.valueOf(jugTemp3.obtenerPuntaje()), jugTemp3.obtenerNombreJugador());
+        }
+
+        if (cantJug >= 4) {
+            iJugador jugTemp4 = partida.listadoJugadores.get(3);
+            showMarcador.setJugador4Visible(true, String.valueOf(jugTemp4.obtenerPuntaje()), jugTemp4.obtenerNombreJugador());
+        }
     }
 
-    /**
-     * Obtiene una cadena con los nombres de los jugadores participantes.
-     * 
-     * @return Cadena con los nombres de los jugadores.
-     */
     private String obtenerNombresJugadores() {
         StringBuilder nombres = new StringBuilder();
         for (iJugador jugador : partida.listadoJugadores) {
@@ -189,4 +244,9 @@ public class PlayGame extends JFrame {
         return nombres.toString();
     }
     
+    
+    public static void main(String[] args) {
+        // Puedes probar la clase PlayGame creando una instancia en el método main
+        // y pasando las listas y partida necesarias.
+    }
 }

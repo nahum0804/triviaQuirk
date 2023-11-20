@@ -4,6 +4,12 @@
  */
 package com.proyecto.triviaquirkproject;
 
+/**
+ * Enumeración que contiene preguntas de historia con opciones de respuesta y respuestas correctas.
+ * Cada pregunta está representada como una constante del enumerador.
+ *
+ * @author Nahúm
+ */
 public enum TriviaPreguntaCine {
     // Definición de las preguntas de cine como constantes del enumerador
     PREGUNTA_1("¿Qué película ganó el Oscar a la mejor película en 1995?", "1) Forrest Gump", "2) Braveheart", "3) Pulp Fiction", (byte)1),

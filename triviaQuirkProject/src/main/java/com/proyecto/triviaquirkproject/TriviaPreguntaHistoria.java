@@ -5,6 +5,8 @@
 package com.proyecto.triviaquirkproject;
 
 /**
+ * Enumeración que contiene preguntas de historia con opciones de respuesta y respuestas correctas.
+ * Cada pregunta está representada como una constante del enumerador.
  *
  * @author Nahúm
  */

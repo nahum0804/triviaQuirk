@@ -32,6 +32,7 @@ public class StartGame extends javax.swing.JFrame {
     
     Categoria cat;
     Partida partida;
+    private String NombreJugador;
     private ArrayList<String> categoriasEscogidas;
     private ArrayList<Jugador> jugadores;
     private Timer timer;
@@ -39,7 +40,7 @@ public class StartGame extends javax.swing.JFrame {
     private int indicePregunta = 0;
     private int indiceJugador = 0;
     private String respuestaEscogida;
-    private Semaphore respuestaSemaphore = new Semaphore(0);
+    private byte respuestaCorrecta;
         
     /**
      * Constructor de la clase StartGame.
@@ -263,24 +264,14 @@ public class StartGame extends javax.swing.JFrame {
         siguientePregunta();
     }//GEN-LAST:event_jButtonSiguienteActionPerformed
 
-    /**
-     * Maneja el evento de hacer clic en el botón "Siguiente".
-     * Llama al método `siguientePregunta()`.
-     * 
-     * @param evt Evento de acción.
-     */
     private void siguientePregunta(){
         this.dispose();
     }
     
-    /**
-     * Obtiene la respuesta escogida.
-     * 
-     * @return La respuesta escogida.
-     */
     public String getRespuestaEscogida(){
         return respuestaEscogida;
     }
+    
     
     /**
      * Set label de pregunta
@@ -315,12 +306,30 @@ public class StartGame extends javax.swing.JFrame {
     }
     
     /**
-     * Establece el nombre de usuario en la etiqueta correspondiente.
+     * Establece el texto del componente de etiqueta (label) para mostrar el nombre de usuario.
      * 
-     * @param username El nombre de usuario.
+     * @param username El nombre de usuario que se establecerá en la etiqueta.
      */
     public void setLblUserName(String username) {
         jLabelUserName.setText(username);
+    }
+
+    /**
+     * Establece el nombre del jugador.
+     * 
+     * @param nombre El nombre que se asignará al jugador.
+     */
+    public void setNombreJugador(String nombre) {
+        this.NombreJugador = nombre;
+    }
+
+    /**
+     * Obtiene el nombre del jugador.
+     * 
+     * @return El nombre del jugador.
+     */
+    public String getNombreJugador() {
+        return this.NombreJugador;
     }
     
     /**

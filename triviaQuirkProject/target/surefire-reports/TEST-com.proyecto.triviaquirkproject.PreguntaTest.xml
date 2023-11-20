@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.proyecto.triviaquirkproject.PreguntaTest" time="0.064" tests="2" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.proyecto.triviaquirkproject.PreguntaTest" time="0.008" tests="2" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="sun.awt.enableExtraMouseButtons" value="true"/>
     <property name="java.class.path" value="C:\Users\Usuario\Desktop\Proyecto2-Java\triviaQuirk\triviaQuirkProject\target\test-classes;C:\Users\Usuario\Desktop\Proyecto2-Java\triviaQuirk\triviaQuirkProject\target\classes;C:\Users\Usuario\.m2\repository\com\dependencies\com.dependencies\1.0.0\com.dependencies-1.0.0.jar;C:\Users\Usuario\.m2\repository\AddiotionalQuest\AddiotionalQuest\1.0\AddiotionalQuest-1.0.jar;C:\Users\Usuario\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.6.0\junit-jupiter-api-5.6.0.jar;C:\Users\Usuario\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\Usuario\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Usuario\.m2\repository\org\junit\platform\junit-platform-commons\1.6.0\junit-platform-commons-1.6.0.jar;C:\Users\Usuario\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.6.0\junit-jupiter-params-5.6.0.jar;C:\Users\Usuario\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.6.0\junit-jupiter-engine-5.6.0.jar;C:\Users\Usuario\.m2\repository\org\junit\platform\junit-platform-engine\1.6.0\junit-platform-engine-1.6.0.jar;"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
@@ -15,9 +16,8 @@
     <property name="user.country" value="CR"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-21\bin"/>
-    <property name="sun.java.command" value="C:\Users\Usuario\AppData\Local\Temp\surefire10492944440942433435\surefirebooter-20231119205231959_3.jar C:\Users\Usuario\AppData\Local\Temp\surefire10492944440942433435 2023-11-19T20-52-31_782-jvmRun1 surefire-20231119205231959_1tmp surefire_0-20231119205231959_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\Usuario\AppData\Local\Temp\surefire10091299828004627787\surefirebooter-20231119234840454_3.jar C:\Users\Usuario\AppData\Local\Temp\surefire10091299828004627787 2023-11-19T23-48-40_255-jvmRun1 surefire-20231119234840454_1tmp surefire_0-20231119234840454_2tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="test" value="com.proyecto.triviaquirkproject.PreguntaTest"/>
     <property name="surefire.test.class.path" value="C:\Users\Usuario\Desktop\Proyecto2-Java\triviaQuirk\triviaQuirkProject\target\test-classes;C:\Users\Usuario\Desktop\Proyecto2-Java\triviaQuirk\triviaQuirkProject\target\classes;C:\Users\Usuario\.m2\repository\com\dependencies\com.dependencies\1.0.0\com.dependencies-1.0.0.jar;C:\Users\Usuario\.m2\repository\AddiotionalQuest\AddiotionalQuest\1.0\AddiotionalQuest-1.0.jar;C:\Users\Usuario\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.6.0\junit-jupiter-api-5.6.0.jar;C:\Users\Usuario\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\Usuario\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Usuario\.m2\repository\org\junit\platform\junit-platform-commons\1.6.0\junit-platform-commons-1.6.0.jar;C:\Users\Usuario\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.6.0\junit-jupiter-params-5.6.0.jar;C:\Users\Usuario\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.6.0\junit-jupiter-engine-5.6.0.jar;C:\Users\Usuario\.m2\repository\org\junit\platform\junit-platform-engine\1.6.0\junit-platform-engine-1.6.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\Usuario"/>
@@ -31,7 +31,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\Usuario\AppData\Local\Temp\surefire10492944440942433435\surefirebooter-20231119205231959_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Usuario\AppData\Local\Temp\surefire10091299828004627787\surefirebooter-20231119234840454_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.1+12-LTS-29"/>
@@ -60,6 +60,6 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="testObtenerRespuestas" classname="com.proyecto.triviaquirkproject.PreguntaTest" time="0.038"/>
+  <testcase name="testObtenerRespuestas" classname="com.proyecto.triviaquirkproject.PreguntaTest" time="0.004"/>
   <testcase name="testObtenerDescripcion" classname="com.proyecto.triviaquirkproject.PreguntaTest" time="0.001"/>
 </testsuite>
