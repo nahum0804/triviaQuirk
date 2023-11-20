@@ -12,14 +12,16 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import poo.proyecto2.triviaquirk.excepciones.excepcionRangoMayor;
 import poo.proyecto2.triviaquirk.iPregunta;
 
 /**
  *
- * @author Usuario
+ * @author Nahum
  */
-public class PreguntaSorpresa implements iPregunta {
+class Pregunta implements iPregunta {
     private final int numeroPregunta;
     private final String descripcion;
     private final String respuesta1;
@@ -27,7 +29,7 @@ public class PreguntaSorpresa implements iPregunta {
     private final String respuesta3;
     private final byte respuestaCorrecta;
 
-    public PreguntaSorpresa(int numeroPregunta, String descripcion, String respuesta1, String respuesta2, String respuesta3, byte respuestaCorrecta) {
+    public Pregunta(int numeroPregunta, String descripcion, String respuesta1, String respuesta2, String respuesta3, byte respuestaCorrecta) {
         this.numeroPregunta = numeroPregunta;
         this.descripcion = descripcion;
         this.respuesta1 = respuesta1;
@@ -58,10 +60,11 @@ public class PreguntaSorpresa implements iPregunta {
 
     @Override
     public byte esCorrecta(byte opcionElegida) throws excepcionRangoMayor, FileNotFoundException {
-        CategoriaSorpresa hc = (CategoriaSorpresa) CategoriaSorpresa.getInstance();
+        Categoria hc = new Categoria();
+        Categoria instancia = hc.getInstance();
         byte valor = 0;
         boolean encontrado = false;
-        FileInputStream fileIn = new FileInputStream("PreguntaSorpresaEstadistica.dat");
+        FileInputStream fileIn = new FileInputStream("PreguntaCienciaTecnologiaEstadistica.dat");
 
         try {
             ObjectInputStream in = new ObjectInputStream(fileIn);
@@ -138,3 +141,4 @@ public class PreguntaSorpresa implements iPregunta {
         System.out.println("La respuesta no fue indicada y se auto-evalupor vencimiento del tiempo de respuesta");
     }
 }
+

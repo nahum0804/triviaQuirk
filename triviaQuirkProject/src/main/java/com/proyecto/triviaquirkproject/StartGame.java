@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -27,7 +28,7 @@ import poo.proyecto2.triviaquirk.iSuscriptorPreguntas;
  */
 public class StartGame extends javax.swing.JFrame {
     
-    CategoriaHistoria cat;
+    Categoria cat;
     Partida partida;
     private ArrayList<String> categoriasEscogidas;
     private ArrayList<Jugador> jugadores;
@@ -36,6 +37,7 @@ public class StartGame extends javax.swing.JFrame {
     private int indicePregunta = 0;
     private int indiceJugador = 0;
     private String respuestaEscogida;
+    private Semaphore respuestaSemaphore = new Semaphore(0);
         
     /**
      * Creates new form StartGame
@@ -210,21 +212,18 @@ public class StartGame extends javax.swing.JFrame {
         resaltarBoton(btnOpcionA);
         respuestaEscogida = "";
         respuestaEscogida = btnOpcionA.getText();
-        System.out.println(respuestaEscogida);
     }//GEN-LAST:event_btnOpcionAActionPerformed
 
     private void btnOpcionBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionBActionPerformed
         resaltarBoton(btnOpcionB);
         respuestaEscogida = "";
         respuestaEscogida = btnOpcionB.getText();
-        System.out.println(respuestaEscogida);
     }//GEN-LAST:event_btnOpcionBActionPerformed
 
     private void btnOpcionCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionCActionPerformed
         resaltarBoton(btnOpcionC);
         respuestaEscogida = " ";
         respuestaEscogida = btnOpcionC.getText();
-        System.out.println(respuestaEscogida);
     }//GEN-LAST:event_btnOpcionCActionPerformed
 
     private void jButtonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSiguienteActionPerformed
@@ -233,6 +232,14 @@ public class StartGame extends javax.swing.JFrame {
 
     private void siguientePregunta(){
         this.dispose();
+    }
+    
+    public String getRespuestaEscogida(){
+        return respuestaEscogida;
+    }
+    
+    public Semaphore getRespuestaSemaphore() {
+        return respuestaSemaphore;
     }
     
     /**
@@ -319,6 +326,7 @@ public class StartGame extends javax.swing.JFrame {
                 btnOpcionC.setEnabled(true);
                 jButtonSiguiente.setEnabled(true);
 
+                
                 // Continuar con la siguiente pregunta
                 siguientePregunta();
 

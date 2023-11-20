@@ -118,7 +118,7 @@ public class Categoria implements iCategorias {
             }
         }
         
-        System.out.println(partida.numeroPreguntasRealizadas);
+       
        //assert partida != null;
         if (numeroDeElementos <= partida.numeroPreguntasRealizadas.size()) {
             throw new excepcionPreguntasNoDisponibles();
@@ -181,7 +181,7 @@ public class Categoria implements iCategorias {
                     break;
             }
             
-            PreguntaHistoria preguntaSolicitada = new PreguntaHistoria(numeroAleatorio, pregunta, respuestaA, respuestaB, respuestaC, respuestaCorrecta);
+            Pregunta preguntaSolicitada = new Pregunta(numeroAleatorio, pregunta, respuestaA, respuestaB, respuestaC, respuestaCorrecta);
             return preguntaSolicitada;
         }
     }

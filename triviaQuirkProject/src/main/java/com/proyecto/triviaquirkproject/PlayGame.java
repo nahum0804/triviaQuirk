@@ -84,38 +84,50 @@ public class PlayGame extends JFrame {
     private void iniciarJuego() throws excepcionPreguntasNoDisponibles {
         
         ArrayList<String> listaDeCategorias = catPadre.obtenerCategorias();
+        System.out.println(listaDeCategorias);
         // Almacena las instancias de StartGame en una cola
         ArrayList<StartGame> juegosPendientes = new ArrayList<>();
         for(String i : listaDeCategorias){
             Categoria catTemp = new Categoria().getInstance();
             catTemp.asignarCategoria(i);
             categoriasJugar.add(catTemp);
+            
         }
         
-        
-        // Jugar según la cantidad de categorías
-        for (Categoria ctTemp : categoriasJugar) {
-            // Crear y mostrar la ventana StartGame
-            for(int i = 0; i < 30; i++){
-                // Registrar la partida y obtener el número de partida
-                int numeroPartida = ctTemp.registrarPartida();
-
-                // Obtener pregunta aleatoria para la partida actual
-                iPregunta pregunta = ctTemp.obtenerPreguntaAleatoria(numeroPartida);
-
-                for(iJugador j : partida.listadoJugadores){
-                    StartGame startGame = new StartGame();
-                    startGame.setLblUserName(j.obtenerNombreJugador());
-                    startGame.setPregunta(pregunta.obtenerDescripcion());
-                    startGame.setOpcionA(pregunta.obtenerRespuesta1());
-                    startGame.setOpcionB(pregunta.obtenerRespuesta2());
-                    startGame.setOpcionC(pregunta.obtenerRespuesta3());
-
-                    juegosPendientes.add(startGame);
-               } 
-            }
-                
+        //num para comparar con el indice random que no se repita
+        int num = 0;
+        for(int i = 0; i < 30; i++){
+            //obtener un indice random de la lista categoriasJugar
+            int indiceRandom = (int) (Math.random() * categoriasJugar.size());
             
+            if (indiceRandom == num){
+                //darle un nuevo que no sea igual al anterior
+                indiceRandom = (int) (Math.random() * categoriasJugar.size());
+                if (indiceRandom == num){
+                    indiceRandom = (int) (Math.random() * categoriasJugar.size());
+                }
+            }
+            num = indiceRandom;
+            System.out.println("numale: "+indiceRandom);
+            //obtener la categoria de la lista categoriasJugar con el indice random
+            Categoria ctTemp = categoriasJugar.get(indiceRandom);
+            // Registrar la partida y obtener el número de partida
+            int numeroPartida = ctTemp.registrarPartida();
+            System.out.println("numparti: "+numeroPartida);
+            
+            // Obtener pregunta aleatoria para la partida actual
+            iPregunta pregunta = ctTemp.obtenerPreguntaAleatoria(numeroPartida);
+
+            for(iJugador j : partida.listadoJugadores){
+                StartGame startGame = new StartGame();
+                startGame.setLblUserName(j.obtenerNombreJugador());
+                startGame.setPregunta(pregunta.obtenerDescripcion());
+                startGame.setOpcionA(pregunta.obtenerRespuesta1());
+                startGame.setOpcionB(pregunta.obtenerRespuesta2());
+                startGame.setOpcionC(pregunta.obtenerRespuesta3());
+
+                juegosPendientes.add(startGame);
+            }
         }
         
         
@@ -127,7 +139,7 @@ public class PlayGame extends JFrame {
         StartGame sg = juegosPendientes.get(0);
         sg.setVisible(true);
         
-        sg.detenerTemporizador();
+        sg.reiniciarTemporizador();
         // Eliminar la primera ventana de juegosPendientes
         juegosPendientes.remove(0);
         // Agregar el WindowListener a la nueva instancia de StartGame
@@ -135,6 +147,7 @@ public class PlayGame extends JFrame {
             @Override
             public void windowClosed(WindowEvent e) {
                 if (juegosPendientes.size() > 0) {
+                    System.out.println("Juegos pendientes: " + juegosPendientes.size());
                     StartGame sg = juegosPendientes.get(0);
                     sg.setVisible(true);
                     juegosPendientes.remove(0);

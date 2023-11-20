@@ -413,7 +413,8 @@ public class MultiLogin extends javax.swing.JFrame {
             for(String categorie : categoriasSeleccionadas){
                 categoriaInstancia.agregarCategorias(categorie);
             }
-            
+            System.out.println(categoriaInstancia.obtenerCategorias());
+            System.out.println(partidaActual);
             PlayGame jugar = new PlayGame(categoriaInstancia, partidaActual);  
            
         }
@@ -526,9 +527,9 @@ public class MultiLogin extends javax.swing.JFrame {
     private void chekbCienciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chekbCienciaActionPerformed
         // TODO add your handling code here:
         if(chekbCiencia.isSelected()){
-            categoriasSeleccionadas.add("Ciencia y Tecnologia");
+            categoriasSeleccionadas.add("Ciencia Y Tecnologia");
         } else {
-            categoriasSeleccionadas.remove("Ciencia y Tecnologia");
+            categoriasSeleccionadas.remove("Ciencia Y Tecnologia");
         }
     }//GEN-LAST:event_chekbCienciaActionPerformed
 
