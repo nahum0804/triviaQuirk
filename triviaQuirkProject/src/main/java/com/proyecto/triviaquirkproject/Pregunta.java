@@ -18,7 +18,9 @@ import poo.proyecto2.triviaquirk.excepciones.excepcionRangoMayor;
 import poo.proyecto2.triviaquirk.iPregunta;
 
 /**
- *
+ * Clase que representa una pregunta en TriviaQuirk.
+ * Implementa la interfaz iPregunta.
+ * 
  * @author Nahum
  */
 class Pregunta implements iPregunta {
@@ -29,6 +31,16 @@ class Pregunta implements iPregunta {
     private final String respuesta3;
     private final byte respuestaCorrecta;
 
+    /**
+     * Constructor de la clase Pregunta.
+     * 
+     * @param numeroPregunta Número de la pregunta.
+     * @param descripcion Descripción de la pregunta.
+     * @param respuesta1 Opción de respuesta 1.
+     * @param respuesta2 Opción de respuesta 2.
+     * @param respuesta3 Opción de respuesta 3.
+     * @param respuestaCorrecta Opción correcta (1, 2 o 3).
+     */
     public Pregunta(int numeroPregunta, String descripcion, String respuesta1, String respuesta2, String respuesta3, byte respuestaCorrecta) {
         this.numeroPregunta = numeroPregunta;
         this.descripcion = descripcion;

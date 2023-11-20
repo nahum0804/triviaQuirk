@@ -5,6 +5,7 @@
 package com.proyecto.triviaquirkproject;
 
 public enum TriviaPreguntaCine {
+    // Definición de las preguntas de cine como constantes del enumerador
     PREGUNTA_1("¿Qué película ganó el Oscar a la mejor película en 1995?", "1) Forrest Gump", "2) Braveheart", "3) Pulp Fiction", (byte)1),
     PREGUNTA_2("¿Quién dirigió la película 'El Padrino'?", "1) Francis Ford Coppola", "2) Martin Scorsese", "3) Steven Spielberg", (byte)1),
     PREGUNTA_3("¿Qué actor ganó el Oscar al mejor actor en 2023?", "1) Will Smith", "2) Benedict Cumberbatch", "3) Javier Bardem", (byte)1),
@@ -42,6 +43,15 @@ public enum TriviaPreguntaCine {
     private final String respuestaC;
     private final byte respuestaCorrecta;
 
+    /**
+     * Constructor privado para inicializar los atributos de cada constante del enumerador.
+     *
+     * @param pregunta            El enunciado de la pregunta.
+     * @param respuestaA          Opción A de respuesta.
+     * @param respuestaB          Opción B de respuesta.
+     * @param respuestaC          Opción C de respuesta.
+     * @param respuestaCorrecta   El byte que identifica la respuesta correcta (1 para A, 2 para B, 3 para C).
+     */    
     private TriviaPreguntaCine(String pregunta, String respuestaA, String respuestaB, String respuestaC, byte respuestaCorrecta) {
         this.pregunta = pregunta;
         this.respuestaA = respuestaA;
@@ -50,22 +60,47 @@ public enum TriviaPreguntaCine {
         this.respuestaCorrecta = respuestaCorrecta;
     }
 
+    /**
+     * Obtiene el enunciado de la pregunta.
+     *
+     * @return El enunciado de la pregunta.
+     */
     public String getPregunta() {
         return this.pregunta;
     }
 
+    /**
+     * Obtiene la opción A de respuesta.
+     *
+     * @return Opción A de respuesta.
+     */
     public String getRespuestaA() {
         return this.respuestaA;
     }
 
+    /**
+     * Obtiene la opción B de respuesta.
+     *
+     * @return Opción B de respuesta.
+     */
     public String getRespuestaB() {
         return this.respuestaB;
     }
 
+    /**
+     * Obtiene la opción C de respuesta.
+     *
+     * @return Opción C de respuesta.
+     */
     public String getRespuestaC() {
         return this.respuestaC;
     }
 
+    /**
+     * Obtiene la respuesta correcta identificada por un byte (1 para A, 2 para B, 3 para C).
+     *
+     * @return La respuesta correcta.
+     */
     public byte getRespuestaCorrecta() {
         return this.respuestaCorrecta;
     }

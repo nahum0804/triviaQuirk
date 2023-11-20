@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
+ * Ventana de inicio del juego de trivia donde los jugadores ingresan sus nombres y seleccionan categorías.
  *
  * @author Arnold
  */
@@ -35,9 +36,9 @@ public class MultiLogin extends javax.swing.JFrame {
     private ArrayList<String> categoriasSeleccionadas; 
     
     /**
-     * Creates new form MultiLogin
+     * Constructor de la clase MultiLogin.
+     * Inicializa la interfaz gráfica y establece los manejadores de eventos.
      */
-   
     public MultiLogin() {
         categoriasSeleccionadas = new ArrayList<>();
         listaDeJugadores = new ArrayList<>();
@@ -53,10 +54,7 @@ public class MultiLogin extends javax.swing.JFrame {
         jLabel3.setVisible(true);
         jLabel4.setVisible(true);
         btnNumJugador.setText("4");
-        
-        //Crear un contador que empiece en 2
-        
-        //hacer una accion cada que clickee el btnnumjugador con el contador
+
         btnNumJugador.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -288,6 +286,11 @@ public class MultiLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+     /**
+     * Maneja la acción del botón "Siguiente".
+     *
+     * @param evt Evento de acción.
+     */
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         // TODO add your handling code here:
         // Verificar si se ha seleccionado al menos una categoría
@@ -420,6 +423,12 @@ public class MultiLogin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
+    /**
+     * Método que valida el nombre del jugador.
+     *
+     * @param username Nombre del jugador a validar.
+     * @return true si el nombre es válido, false si no lo es.
+     */
     private boolean validateName(String username){
         String regex = "^[a-zA-Z0-9]+$";
 
@@ -435,6 +444,11 @@ public class MultiLogin extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Maneja la acción del botón "Añadir Jugadores".
+     *
+     * @param evt Evento de acción.
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        
         if(tfJugador1.isVisible()){
@@ -524,6 +538,12 @@ public class MultiLogin extends javax.swing.JFrame {
   
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    
+    /**
+     * Maneja la acción del checkbox "Ciencia".
+     *
+     * @param evt Evento de acción.
+     */
     private void chekbCienciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chekbCienciaActionPerformed
         // TODO add your handling code here:
         if(chekbCiencia.isSelected()){
@@ -533,6 +553,12 @@ public class MultiLogin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_chekbCienciaActionPerformed
 
+    
+    /**
+    * Maneja la acción del checkbox "Cine".
+    *
+    * @param evt Evento de acción generado por el checkbox "Cine".
+    */
     private void chekbCineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chekbCineActionPerformed
         // TODO add your handling code here:
         if(chekbCine.isSelected()){
@@ -542,6 +568,11 @@ public class MultiLogin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_chekbCineActionPerformed
 
+    /**
+    * Maneja la acción del checkbox "Historia".
+    *
+    * @param evt Evento de acción generado por el checkbox "Historia".
+    */
     private void chekbHistoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chekbHistoriaActionPerformed
         // TODO add your handling code here:
         if(chekbHistoria.isSelected()){
@@ -551,6 +582,11 @@ public class MultiLogin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_chekbHistoriaActionPerformed
 
+    /**
+    * Maneja la acción del checkbox "Sorpresa".
+    *
+    * @param evt Evento de acción generado por el checkbox "Sorpresa".
+    */
     private void chekbSorpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chekbSorpresaActionPerformed
         // TODO add your handling code here:
         if(chekbSorpresa.isSelected()){
@@ -561,7 +597,9 @@ public class MultiLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_chekbSorpresaActionPerformed
 
     /**
-     * @param args the command line arguments
+     * Punto de entrada principal para la aplicación.
+     *
+     * @param args Los argumentos de la línea de comandos.
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

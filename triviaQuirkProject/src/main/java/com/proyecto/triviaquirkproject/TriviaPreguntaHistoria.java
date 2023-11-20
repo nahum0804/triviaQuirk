@@ -40,12 +40,22 @@ public enum TriviaPreguntaHistoria {
     PREGUNTA_29("¿Quién fue el líder militar y político de la independencia de Panamá de Colombia en 1903?", "1) Simón Bolívar", "2) José Martí", "3) Manuel Amador Guerrero", (byte)3),
     PREGUNTA_30("¿En qué año se firmó el Tratado de Paz de Westfalia, que puso fin a la Guerra de los Treinta Años?", "1) 1648", "2) 1600", "3) 1672", (byte)1);
 
+    
     private final String pregunta;
     private final String respuestaA;
     private final String respuestaB;
     private final String respuestaC;
     private final byte respuestaCorrecta;
 
+    /**
+     * Constructor privado para inicializar los atributos de cada constante del enumerador.
+     *
+     * @param pregunta            El enunciado de la pregunta.
+     * @param respuestaA          Opción A de respuesta.
+     * @param respuestaB          Opción B de respuesta.
+     * @param respuestaC          Opción C de respuesta.
+     * @param respuestaCorrecta   El byte que identifica la respuesta correcta (1 para A, 2 para B, 3 para C).
+     */
     private TriviaPreguntaHistoria(String pregunta, String respuestaA, String respuestaB, String respuestaC, byte respuestaCorrecta) {
         this.pregunta = pregunta;
         this.respuestaA = respuestaA;
@@ -54,22 +64,47 @@ public enum TriviaPreguntaHistoria {
         this.respuestaCorrecta = respuestaCorrecta;
     }
 
+    /**
+     * Obtiene el enunciado de la pregunta.
+     *
+     * @return El enunciado de la pregunta.
+     */
     public String getPregunta() {
         return this.pregunta;
     }
 
+    /**
+     * Obtiene la opción A de respuesta.
+     *
+     * @return Opción A de respuesta.
+     */
     public String getRespuestaA() {
         return this.respuestaA;
     }
 
+    /**
+     * Obtiene la opción B de respuesta.
+     *
+     * @return Opción B de respuesta.
+     */
     public String getRespuestaB() {
         return this.respuestaB;
     }
 
+    /**
+     * Obtiene la opción C de respuesta.
+     *
+     * @return Opción C de respuesta.
+     */
     public String getRespuestaC() {
         return this.respuestaC;
     }
 
+    /**
+     * Obtiene la respuesta correcta identificada por un byte (1 para A, 2 para B, 3 para C).
+     *
+     * @return La respuesta correcta.
+     */
     public byte getRespuestaCorrecta() {
         return this.respuestaCorrecta;
     }

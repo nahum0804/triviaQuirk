@@ -5,8 +5,10 @@
 package com.proyecto.triviaquirkproject;
 
 /**
+ * Enumeración que contiene preguntas de historia con opciones de respuesta y respuestas correctas.
+ * Cada pregunta está representada como una constante del enumerador.
  *
- * @author Usuario
+ * @author Nahúm
  */
 public enum TriviaPreguntaTecnologiaYCiencia {
     PREGUNTA_1("¿Quién es considerado el padre de la informática?", "1) Alan Turing", "2) Bill Gates", "3) Steve Jobs", (byte)1),
@@ -46,6 +48,15 @@ public enum TriviaPreguntaTecnologiaYCiencia {
     private final String respuestaC;
     private final byte respuestaCorrecta;
 
+    /**
+     * Constructor privado para inicializar los atributos de cada constante del enumerador.
+     *
+     * @param pregunta            El enunciado de la pregunta.
+     * @param respuestaA          Opción A de respuesta.
+     * @param respuestaB          Opción B de respuesta.
+     * @param respuestaC          Opción C de respuesta.
+     * @param respuestaCorrecta   El byte que identifica la respuesta correcta (1 para A, 2 para B, 3 para C).
+     */
     private TriviaPreguntaTecnologiaYCiencia(String pregunta, String respuestaA, String respuestaB, String respuestaC, byte respuestaCorrecta) {
         this.pregunta = pregunta;
         this.respuestaA = respuestaA;
@@ -54,22 +65,47 @@ public enum TriviaPreguntaTecnologiaYCiencia {
         this.respuestaCorrecta = respuestaCorrecta;
     }
 
+    /**
+     * Obtiene el enunciado de la pregunta.
+     *
+     * @return El enunciado de la pregunta.
+     */
     public String getPregunta() {
         return this.pregunta;
     }
 
+    /**
+     * Obtiene la opción A de respuesta.
+     *
+     * @return Opción A de respuesta.
+     */
     public String getRespuestaA() {
         return this.respuestaA;
     }
 
+    /**
+     * Obtiene la opción B de respuesta.
+     *
+     * @return Opción B de respuesta.
+     */
     public String getRespuestaB() {
         return this.respuestaB;
     }
 
+    /**
+     * Obtiene la opción C de respuesta.
+     *
+     * @return Opción C de respuesta.
+     */
     public String getRespuestaC() {
         return this.respuestaC;
     }
 
+    /**
+     * Obtiene la respuesta correcta identificada por un byte (1 para A, 2 para B, 3 para C).
+     *
+     * @return La respuesta correcta.
+     */
     public byte getRespuestaCorrecta() {
         return this.respuestaCorrecta;
     }

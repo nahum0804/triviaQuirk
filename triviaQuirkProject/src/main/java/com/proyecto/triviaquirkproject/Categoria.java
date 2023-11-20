@@ -16,8 +16,11 @@ import poo.proyecto2.triviaquirk.iPregunta;
 import poo.proyecto2.triviaquirk.iSuscriptorPreguntas;
 
 /**
+ * Clase que representa una categoría en el juego de trivia Quirk.
+ * Cada categoría tiene un nombre, partidas activas, y métodos para gestionar preguntas y jugadores.
+ * Implementa la interfaz iCategorias.
  *
- * @author Usuario
+ * @author Nahum
  */
 public class Categoria implements iCategorias {
 
@@ -28,15 +31,30 @@ public class Categoria implements iCategorias {
     private ArrayList<String> categoriasEscogidas = new ArrayList<>();
     private ArrayList<iPregunta> preguntasUsadas;
     
+    /**
+     * Obtiene la instancia única de la categoría utilizando el patrón Singleton.
+     *
+     * @return La instancia de la categoría.
+     */
     public Categoria getInstance(){
         return instancia == null ? new Categoria() : instancia;
     }
     
+    /**
+     * Obtiene el nombre de la categoría.
+     *
+     * @return El nombre de la categoría.
+     */
     @Override
     public String nombreCategoria() {
         return nombreCategoria;
     }
 
+    /**
+     * Registra una nueva partida y devuelve su número.
+     *
+     * @return El número de la nueva partida registrada.
+     */
     @Override
     public int registrarPartida() {
         int nuevaPartida = 0;
@@ -53,6 +71,12 @@ public class Categoria implements iCategorias {
         return nuevaPartida;
     }
 
+    /**
+     * Finaliza una partida activa dado su número.
+     *
+     * @param numeroPartida El número de la partida a finalizar.
+     * @throws excepcionPartidaNoDisponible Si la partida no está disponible.
+     */
     @Override
     public void finalizarPartida(int numeroPartida) throws excepcionPartidaNoDisponible {
         boolean encontrada = false;
@@ -70,6 +94,13 @@ public class Categoria implements iCategorias {
         }
     }
 
+    /**
+     * Obtiene una pregunta aleatoria para una partida específica.
+     *
+     * @param numeroPartida El número de la partida.
+     * @return La pregunta aleatoria.
+     * @throws excepcionPreguntasNoDisponibles Si no hay preguntas disponibles.
+     */
     @Override
     public iPregunta obtenerPreguntaAleatoria(int numeroPartida) throws excepcionPreguntasNoDisponibles {
         
@@ -118,8 +149,6 @@ public class Categoria implements iCategorias {
             }
         }
         
-       
-       //assert partida != null;
         if (numeroDeElementos <= partida.numeroPreguntasRealizadas.size()) {
             throw new excepcionPreguntasNoDisponibles();
         } else {
@@ -186,6 +215,12 @@ public class Categoria implements iCategorias {
         }
     }
 
+    /**
+     * Publica el puntaje de una partida en los suscriptores registrados.
+     *
+     * @param numeroPartida El número de la partida.
+     * @throws excepcionPartidaNoDisponible Si la partida no está disponible.
+     */
     @Override
     public void publicarEnSuscriptores(int numeroPartida) throws excepcionPartidaNoDisponible {
         Partida partida = null;
@@ -210,6 +245,13 @@ public class Categoria implements iCategorias {
         }
     }
 
+    /**
+     * Agrega un suscriptor a una partida específica.
+     *
+     * @param numeroPartida El número de la partida.
+     * @param sp             El suscriptor a agregar.
+     * @throws excepcionPartidaNoDisponible Si la partida no está disponible.
+     */
     @Override
     public void agregarSuscriptor(int numeroPartida, iSuscriptorPreguntas sp) throws excepcionPartidaNoDisponible {
         Partida partida = null;
@@ -228,6 +270,11 @@ public class Categoria implements iCategorias {
         }
     }
 
+    /**
+     * Obtiene la cantidad total de preguntas disponibles en la categoría.
+     *
+     * @return La cantidad total de preguntas.
+     */
     @Override
     public short cantidadDePreguntasExistentes() {
         TriviaPreguntaCine[] elementos = TriviaPreguntaCine.values();
@@ -235,6 +282,13 @@ public class Categoria implements iCategorias {
         return (short)numeroDeElementos;
     }
 
+    /**
+     * Agrega un jugador a una partida específica.
+     *
+     * @param numeroPartida El número de la partida.
+     * @param jugador       El jugador a agregar.
+     * @throws excepcionPartidaNoDisponible Si la partida no está disponible.
+     */
     @Override
     public void agregarJugador(int numeroPartida, iJugador jugador) throws excepcionPartidaNoDisponible {
         Partida partida = null;
@@ -253,21 +307,39 @@ public class Categoria implements iCategorias {
         }
     }
     
+    /**
+     * Agrega una categoría a la lista de categorías escogidas.
+     *
+     * @param categoria La categoría a agregar.
+     */
     public void agregarCategorias(String categoria){
         categoriasEscogidas.add(categoria);
     }
     
+    /**
+     * Obtiene la lista de categorías escogidas.
+     *
+     * @return La lista de categorías escogidas.
+     */
     public ArrayList<String> obtenerCategorias(){
         return categoriasEscogidas;
     }
     
+    /**
+     * Asigna un nombre a la categoría.
+     *
+     * @param nombreCategoria El nombre de la categoría.
+     */
     public void asignarCategoria(String nombreCategoria){
         this.nombreCategoria = nombreCategoria;
     }
     
+    /**
+     * Agrega una pregunta usada a la lista de preguntas usadas.
+     *
+     * @param preguntaJugada La pregunta usada a agregar.
+     */
     public void addPreguntaUsada(iPregunta preguntaJugada){
             preguntasUsadas.add(preguntaJugada);
     }
-    
-    
 }

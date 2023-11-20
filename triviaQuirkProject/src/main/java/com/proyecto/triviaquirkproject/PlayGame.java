@@ -20,7 +20,10 @@ import poo.proyecto2.triviaquirk.iJugador;
 import poo.proyecto2.triviaquirk.iPregunta;
 
 /**
- *
+ * Clase que representa la ventana de inicio de juego en TriviaQuirk.
+ * Permite a los jugadores ver la lista de jugadores, el número de partida,
+ * e iniciar el juego con preguntas de categorías aleatorias.
+ * 
  * @author Nahum
  */
 public class PlayGame extends JFrame {
@@ -34,53 +37,64 @@ public class PlayGame extends JFrame {
     private Categoria catPadre;
     private ArrayList<Categoria> categoriasJugar = new ArrayList<>();;
 
-      public PlayGame(Categoria catPadre, Partida partida) {
-        this.listaCategorias = listaCategorias;
-        this.partida = partida;
-        this.numJugadores = partida.listadoJugadores.size();
-        this.catPadre = catPadre;
-        
-          System.out.println(partida.numeroPartida + " desde el constructor");
-   
-        
-        // Configuración de la ventana
-        setTitle("Inicio de Juego");
-        setSize(300, 250);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(null); // Usar un administrador de diseño más avanzado si es necesario
+    /**
+     * Constructor de la clase PlayGame.
+     * 
+     * @param catPadre Categoría principal del juego.
+     * @param partida Partida actual.
+     */
+    public PlayGame(Categoria catPadre, Partida partida) {
+      this.listaCategorias = listaCategorias;
+      this.partida = partida;
+      this.numJugadores = partida.listadoJugadores.size();
+      this.catPadre = catPadre;
 
-        // Inicialización de componentes
-        JLabel lblJugador = new JLabel("Jugadores: ");
-        lblJugador.setBounds(20, 20, 250, 20);
-        add(lblJugador);
+        System.out.println(partida.numeroPartida + " desde el constructor");
 
-        JTextArea txtAreaJugadores = new JTextArea(obtenerNombresJugadores());
-        txtAreaJugadores.setBounds(20, 40, 250, 60);
-        txtAreaJugadores.setEditable(false);
-        add(txtAreaJugadores);
 
-        lblNumeroPartida = new JLabel("Número de partida: " + partida.numeroPartida);
-        lblNumeroPartida.setBounds(20, 110, 250, 20);
-        add(lblNumeroPartida);
+      // Configuración de la ventana
+      setTitle("Inicio de Juego");
+      setSize(300, 250);
+      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      setLayout(null); // Usar un administrador de diseño más avanzado si es necesario
 
-        btnIniciar = new JButton("Iniciar Juego");
-        btnIniciar.setBounds(20, 140, 150, 30);
-        btnIniciar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    iniciarJuego();
-                } catch (excepcionPreguntasNoDisponibles ex) {
-                    Logger.getLogger(PlayGame.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-        add(btnIniciar);
+      // Inicialización de componentes
+      JLabel lblJugador = new JLabel("Jugadores: ");
+      lblJugador.setBounds(20, 20, 250, 20);
+      add(lblJugador);
 
-        // Mostrar la ventana
-        setVisible(true);
+      JTextArea txtAreaJugadores = new JTextArea(obtenerNombresJugadores());
+      txtAreaJugadores.setBounds(20, 40, 250, 60);
+      txtAreaJugadores.setEditable(false);
+      add(txtAreaJugadores);
+
+      lblNumeroPartida = new JLabel("Número de partida: " + partida.numeroPartida);
+      lblNumeroPartida.setBounds(20, 110, 250, 20);
+      add(lblNumeroPartida);
+
+      btnIniciar = new JButton("Iniciar Juego");
+      btnIniciar.setBounds(20, 140, 150, 30);
+      btnIniciar.addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+              try {
+                  iniciarJuego();
+              } catch (excepcionPreguntasNoDisponibles ex) {
+                  Logger.getLogger(PlayGame.class.getName()).log(Level.SEVERE, null, ex);
+              }
+          }
+      });
+      add(btnIniciar);
+
+      // Mostrar la ventana
+      setVisible(true);
     }
 
+    /**
+     * Inicia el juego seleccionando preguntas aleatorias de categorías.
+     * 
+     * @throws excepcionPreguntasNoDisponibles Excepción en caso de preguntas no disponibles.
+     */
     private void iniciarJuego() throws excepcionPreguntasNoDisponibles {
         
         ArrayList<String> listaDeCategorias = catPadre.obtenerCategorias();
@@ -162,6 +176,11 @@ public class PlayGame extends JFrame {
         });
     }
 
+    /**
+     * Obtiene una cadena con los nombres de los jugadores participantes.
+     * 
+     * @return Cadena con los nombres de los jugadores.
+     */
     private String obtenerNombresJugadores() {
         StringBuilder nombres = new StringBuilder();
         for (iJugador jugador : partida.listadoJugadores) {
@@ -170,9 +189,4 @@ public class PlayGame extends JFrame {
         return nombres.toString();
     }
     
-    
-    public static void main(String[] args) {
-        // Puedes probar la clase PlayGame creando una instancia en el método main
-        // y pasando las listas y partida necesarias.
-    }
 }
